@@ -3,7 +3,7 @@ import { Hidden } from "@mui/material";
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({setShowLogin}) => {
   const [menu, setMenu] = useState("home");
   const [open, setOpen] = useState(false);
 
@@ -59,8 +59,8 @@ const Navbar = () => {
                 Shop
               </NavLink>
               <div>
-                <AccountCircle className="mr-1" />
-                <button>Login</button>
+                <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
+                <button onClick={()=>setShowLogin(true)}>Login</button>
               </div>
               <a href="">
                 <ShoppingCart />
