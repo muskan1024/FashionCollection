@@ -12,7 +12,7 @@ const Shop = ({ categ, setCateg }) => {
     <>
     {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
       <Navbar setShowLogin={setShowLogin} />
-      <div className="max-w-[90%] md:max-w-[80%] mx-auto">
+      <div className="max-w-[90%] md:max-w-[80%] mx-auto mt-16">
         <div className="cat-list">
           {category_list.map((item, index) => {
             return (
@@ -37,9 +37,7 @@ const Shop = ({ categ, setCateg }) => {
         </div>
         <br />
           <br />
-      <div>
-        <h1>Top 4 Products.</h1>
-      </div>
+      
       </div>
           
     </>

@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import shop from "./shop.css";
 import { category_list } from "../assets/assets";
 import Login from "./Login";
+import Footer from "./Footer";
 
 const Home = ({ categ, setCateg }) => {
   const [showLogin,setShowLogin]=useState(false)
@@ -10,7 +11,7 @@ const Home = ({ categ, setCateg }) => {
     <>
     {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
       <Navbar setShowLogin={setShowLogin} />
-      <div className="max-w-[90%] md:max-w-[70%] mx-auto">
+      <div className="max-w-[90%] md:max-w-[70%] mx-auto mt-20">
         <img
           src="/images/baner-1.png"
           alt="baner"
@@ -39,6 +40,7 @@ const Home = ({ categ, setCateg }) => {
           })}
         </div>
       </div>
+      <Footer setShowLogin={setShowLogin}/>
     </>
   );
 };
