@@ -15,10 +15,10 @@ const Login = ({setShowLogin}) => {
             {currState ==="Login"?(
                     <></>
                 ):(
-                    <input type="text" placeholder='Your  Name' required/>
+                    <input type="text" placeholder='Your Full Name' required/>
                 ) }
-                <input type="email" placeholder='Youe E-Mail' required />
-                <input type="password" placeholder='Youe Password' required />
+                <input type="email" placeholder='Your E-Mail ID' required />
+                <input type="password" placeholder='Your Password' required />
         </div>
         <button>{currState==="Sign Up"?"Create account":"Login"}</button>
         {currState==="Login"?(
@@ -26,7 +26,7 @@ const Login = ({setShowLogin}) => {
             <span onClick={()=>setCurrState("Sign Up")}>Click here</span>
             </p>
         ):(
-            <p>Already have an account{""}
+            <p>Already have an account?{""}
             <span onClick={()=>setCurrState("Login")}>Login here</span></p>
         )}
         </form>
