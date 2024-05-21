@@ -1,0 +1,17 @@
+{
+  "name": "fashioncollection",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "concurrently \"cd frontend && npm start\" \"cd backend && npm run dev\" ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "react-loading-skeleton": "^3.4.0"
+  }
+}
