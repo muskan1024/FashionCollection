@@ -9,7 +9,7 @@ const Navbar = ({setShowLogin}) => {
 
   return (
     <>
-      <div className="relative top-0 w-full z-10">
+      <div className="relative top-0 w-full ">
         <div className="grid grid-cols-2 md:grid-cols-3 justify-items-center md:justify-around px-2 py-3 shadow-lg">
           <div className="justify-self-center w-full md:w-fit flex items-center gap-2 font-bold text-xl">
             <img src="/images/fc-logo.png" alt="" className="w-5 " />
