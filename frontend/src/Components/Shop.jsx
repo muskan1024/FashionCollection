@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import shop from "./shop.css";
 import { category_list } from "../assets/assets";
 import Login from "./Login";
+import Footer from "./Footer";
 
 
 const Shop = ({ categ, setCateg }) => {
@@ -39,6 +40,7 @@ const Shop = ({ categ, setCateg }) => {
           <br />
       
       </div>
+      <Footer setShowLogin={setShowLogin}/>
           
     </>
   );

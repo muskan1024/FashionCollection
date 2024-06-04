@@ -80,13 +80,13 @@ const Footer = ({ setShowLogin }) => {
       <hr className="border-[1px] border-gray-400 block sm:hidden"/>
 
       <div className="grid gap-2">
-        <Link to="/" className="hover:border-b-2 hover:border-red-500 ">
+        <Link to="/" className="hover:border-b-2 hover:border-red-500 w-fit">
           Home
         </Link>
-        <Link to="/shop" className="hover:border-b-2 hover:border-red-500 ">
+        <Link to="/shop" className="hover:border-b-2 hover:border-red-500 w-fit">
           Shop
         </Link>
-        <Link className="hover:border-b-2 hover:border-red-500 ">About Us</Link>
+        <Link className="hover:border-b-2 hover:border-red-500 w-fit">About Us</Link>
         <Link onClick={() => setShowLogin(true)}>Login</Link>
       </div>
     </div>
