@@ -87,6 +87,12 @@ const Footer = ({ setShowLogin }) => {
           Shop
         </Link>
         <Link className="hover:border-b-2 hover:border-red-500 w-fit">About Us</Link>
+        <Link to="/about" className={({ isActive }) =>
+                  isActive
+                    ? "border-b-2 border-red-500  ease-in duration-300"
+                    : ""
+                }>About Us</Link>
+
         <Link onClick={() => setShowLogin(true)}>Login</Link>
       </div>
     </div>
