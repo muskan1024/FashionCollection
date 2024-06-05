@@ -1,5 +1,4 @@
 import { AccountCircle, Menu, Search, ShoppingCart } from "@mui/icons-material";
-import { Hidden } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
@@ -71,15 +70,13 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
               >
                 Shop
               </NavLink>
-              <Link to="/cart">
+              <a href="">
                 <ShoppingCart />
-              </Link>
-              
+              </a>
               {isLoggedIn ? (
                 <div className="flex items-center">
                   <AccountCircle onClick={handleLogout}/>
                   {/* <button onClick={handleLogout}>Profile</button> */}
-                  {/* <button>Profile</button> */}
                 </div>
               ) : (
                 <div className="flex items-center">
@@ -89,15 +86,7 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
                   />
                   <button onClick={() => setShowLogin(true)}>Login</button>
                 </div>
-              )}
-              {/* <div>
-                <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
-                <button onClick={()=>setShowLogin(true)}>Login</button>
-              </div> */}
-              </div>
-              <a href="/cart">
-                <ShoppingCart />
-              </a>
+              )}     
             </ul>
           </div>
         </div>
