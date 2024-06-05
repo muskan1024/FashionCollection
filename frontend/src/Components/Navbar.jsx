@@ -94,7 +94,10 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
                 <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
                 <button onClick={()=>setShowLogin(true)}>Login</button>
               </div> */}
-              
+              </div>
+              <a href="/cart">
+                <ShoppingCart />
+              </a>
             </ul>
           </div>
         </div>
