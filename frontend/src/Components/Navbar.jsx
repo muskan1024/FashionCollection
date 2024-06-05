@@ -62,7 +62,7 @@ const Navbar = ({setShowLogin}) => {
                 <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
                 <button onClick={()=>setShowLogin(true)}>Login</button>
               </div>
-              <a href="">
+              <a href="/cart">
                 <ShoppingCart />
               </a>
             </ul>
