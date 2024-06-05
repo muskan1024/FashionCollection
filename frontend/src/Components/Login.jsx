@@ -1,6 +1,6 @@
 import { Cancel } from "@mui/icons-material";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import login from "./login.css";
 import axios from "axios";
 

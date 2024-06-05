@@ -71,9 +71,10 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
               >
                 Shop
               </NavLink>
-              <a href="">
+              <Link to="/cart">
                 <ShoppingCart />
-              </a>
+              </Link>
+              
               {isLoggedIn ? (
                 <div className="flex items-center">
                   <AccountCircle onClick={handleLogout}/>
