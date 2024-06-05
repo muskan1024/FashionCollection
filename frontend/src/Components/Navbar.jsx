@@ -1,17 +1,30 @@
 import { AccountCircle, Menu, Search, ShoppingCart } from "@mui/icons-material";
 import { Hidden } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const Navbar = ({setShowLogin}) => {
-  const [menu, setMenu] = useState("home");
+const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
+  // const [menu, setMenu] = useState("home");
   const [open, setOpen] = useState(false);
+  useEffect(() => {
+    const loggedIn = localStorage.getItem("isLoggedIn");
+    if (loggedIn) {
+      setIsLoggedIn(true);
+    }
+  }, [setIsLoggedIn]);
 
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("isLoggedIn");
+  };
   return (
     <>
       <div className="fixed top-0 w-full z-10 bg-white">
         <div className="grid grid-cols-2 md:grid-cols-3 justify-items-center md:justify-around px-2 py-3 shadow-lg">
-          <Link to="/" className="justify-self-center w-full md:w-fit flex items-center gap-2 font-bold text-xl">
+          <Link
+            to="/"
+            className="justify-self-center w-full md:w-fit flex items-center gap-2 font-bold text-xl"
+          >
             <img src="/images/fc-logo.png" alt="" className="w-5 " />
             <span className="text-red-600 ">FASHION</span>
             <span>COLLECTION</span>
@@ -58,13 +71,29 @@ const Navbar = ({setShowLogin}) => {
               >
                 Shop
               </NavLink>
-              <div>
-                <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
-                <button onClick={()=>setShowLogin(true)}>Login</button>
-              </div>
               <a href="">
                 <ShoppingCart />
               </a>
+              {isLoggedIn ? (
+                <div className="flex items-center">
+                  <AccountCircle onClick={handleLogout}/>
+                  {/* <button onClick={handleLogout}>Profile</button> */}
+                  {/* <button>Profile</button> */}
+                </div>
+              ) : (
+                <div className="flex items-center">
+                  <AccountCircle
+                    onClick={() => setShowLogin(true)}
+                    className="mr-1"
+                  />
+                  <button onClick={() => setShowLogin(true)}>Login</button>
+                </div>
+              )}
+              {/* <div>
+                <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
+                <button onClick={()=>setShowLogin(true)}>Login</button>
+              </div> */}
+              
             </ul>
           </div>
         </div>

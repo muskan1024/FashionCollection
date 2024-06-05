@@ -7,10 +7,11 @@ import Footer from "./Footer";
 
 const Home = ({ categ, setCateg }) => {
   const [showLogin,setShowLogin]=useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
-    {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
-      <Navbar setShowLogin={setShowLogin} />
+    {showLogin?<Login setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />:<></>}
+      <Navbar setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <div className="max-w-[90%] md:max-w-[70%] mx-auto mt-20">
         <img
           src="/images/baner-1.png"
@@ -40,7 +41,7 @@ const Home = ({ categ, setCateg }) => {
           })}
         </div>
       </div>
-      <Footer setShowLogin={setShowLogin}/>
+      <Footer/>
     </>
   );
 };

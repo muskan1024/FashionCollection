@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Footer = ({ setShowLogin }) => {
+const Footer = () => {
   return (
     <div className=" grid grid-col grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-5 bg-slate-300 p-3 gap-3 sm:gap-8 ">
       <div className="">
@@ -86,14 +86,7 @@ const Footer = ({ setShowLogin }) => {
         <Link to="/shop" className="hover:border-b-2 hover:border-red-500 w-fit">
           Shop
         </Link>
-        <Link className="hover:border-b-2 hover:border-red-500 w-fit">About Us</Link>
-        <Link to="/about" className={({ isActive }) =>
-                  isActive
-                    ? "border-b-2 border-red-500  ease-in duration-300"
-                    : ""
-                }>About Us</Link>
-
-        <Link onClick={() => setShowLogin(true)}>Login</Link>
+        <Link to="/about" className="hover:border-b-2 hover:border-red-500 w-fit">About Us</Link>
       </div>
     </div>
   );
