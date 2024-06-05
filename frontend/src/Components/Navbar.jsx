@@ -70,13 +70,15 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
               >
                 Shop
               </NavLink>
-              <a href="">
+              <Link to="/cart">
                 <ShoppingCart />
-              </a>
+              </Link>
+              
               {isLoggedIn ? (
                 <div className="flex items-center">
                   <AccountCircle onClick={handleLogout}/>
                   {/* <button onClick={handleLogout}>Profile</button> */}
+                  {/* <button>Profile</button> */}
                 </div>
               ) : (
                 <div className="flex items-center">
@@ -86,7 +88,12 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
                   />
                   <button onClick={() => setShowLogin(true)}>Login</button>
                 </div>
-              )}     
+              )}
+              {/* <div>
+                <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
+                <button onClick={()=>setShowLogin(true)}>Login</button>
+              </div> */}
+              
             </ul>
           </div>
         </div>
