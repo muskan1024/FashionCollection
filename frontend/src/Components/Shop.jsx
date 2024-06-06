@@ -21,7 +21,7 @@ const Shop = ({ categ, setCateg }) => {
                 className="cat-item-list"
                 onClick={() =>
                   setCateg((prev) =>
-                    prev == item.cat_name ? "All" : item.cat_name
+                    prev === item.cat_name ? "All" : item.cat_name
                   )
                 }
                 key={index}
