@@ -19,7 +19,7 @@ const Navbar = ({ setShowLogin }) => {
       <div className="fixed top-0 w-full z-10 bg-white">
         <div className="grid grid-cols-2 md:grid-cols-3 justify-items-center md:justify-around px-2 py-3 shadow-lg">
           <Link
-            to="/"
+            to="/home"
             className="justify-self-center w-full md:w-fit flex items-center gap-2 font-bold text-xl"
           >
             <img src="/images/fc-logo.png" alt="" className="w-5 " />

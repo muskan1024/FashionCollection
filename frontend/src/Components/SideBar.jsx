@@ -9,8 +9,8 @@ export const SideBar = ({ isOpen, onClose }) => {
 
   const handleLogout = () => {
     logout();
-    window.location.reload();
-    history("/");
+    // window.location.reload("/home");
+    history("/home");
   };
   return (
       <div

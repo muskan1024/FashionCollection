@@ -1,6 +1,5 @@
 import {
   LocalPhone,
-  LocalPhoneOutlined,
   Mail,
   Place,
   WhatsApp,

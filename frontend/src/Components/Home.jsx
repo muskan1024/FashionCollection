@@ -6,12 +6,14 @@ import Login from "./Login";
 import Footer from "./Footer";
 
 const Home = ({ categ, setCateg }) => {
-  // const [showLogin,setShowLogin]=useState(false)
+  const [showLogin,setShowLogin]=useState(false)
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
     {/* {showLogin?<Login setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />:<></>}
       <Navbar setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> */}
+      {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
+      <Navbar setShowLogin={setShowLogin} />
       <div className="max-w-[90%] md:max-w-[70%] mx-auto mt-20">
         <img
           src="/images/baner-1.png"
@@ -25,7 +27,7 @@ const Home = ({ categ, setCateg }) => {
                 className="cat-item-list"
                 onClick={() =>
                   setCateg((prev) =>
-                    prev == item.cat_name ? "All" : item.cat_name
+                    prev === item.cat_name ? "All" : item.cat_name
                   )
                 }
                 key={index}
