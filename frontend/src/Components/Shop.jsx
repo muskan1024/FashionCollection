@@ -7,12 +7,10 @@ import Footer from "./Footer";
 
 
 const Shop = ({ categ, setCateg }) => {
-  const [showLogin,setShowLogin]=useState(false)
 
   return (
     <>
-    {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
-      <Navbar setShowLogin={setShowLogin} />
+
       <div className="max-w-[90%] md:max-w-[80%] mx-auto mt-16">
         <div className="cat-list">
           {category_list.map((item, index) => {
@@ -40,7 +38,7 @@ const Shop = ({ categ, setCateg }) => {
           <br />
       
       </div>
-      <Footer setShowLogin={setShowLogin}/>
+      <Footer/>
           
     </>
   );

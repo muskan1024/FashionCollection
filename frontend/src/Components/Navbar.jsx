@@ -1,21 +1,19 @@
 import { AccountCircle, Menu, Search, ShoppingCart } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { SideBar } from "./SideBar";
+import { useUserContext } from "./UserContext";
 
-const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
+const Navbar = ({ setShowLogin }) => {
   // const [menu, setMenu] = useState("home");
+  const { userData } = useUserContext();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const loggedIn = localStorage.getItem("isLoggedIn");
-    if (loggedIn) {
-      setIsLoggedIn(true);
-    }
-  }, [setIsLoggedIn]);
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedIn");
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
+
   return (
     <>
       <div className="fixed top-0 w-full z-10 bg-white">
@@ -54,8 +52,8 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? "border-b-2 border-red-500  ease-in duration-300"
-                    : ""
+                    ? "border-b-2 border-slate-400  ease-in duration-300"
+                    : "hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
                 }
               >
                 Home
@@ -64,24 +62,22 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
                 to="/shop"
                 className={({ isActive }) =>
                   isActive
-                    ? "border-b-2 border-red-500  ease-in duration-300"
-                    : ""
+                    ? "border-b-2 border-slate-400  ease-in duration-300"
+                    : "hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
                 }
               >
                 Shop
               </NavLink>
-              <Link to="/cart">
-                <ShoppingCart />
+              <Link to="/cart" className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
+                <ShoppingCart/>
               </Link>
               
-              {isLoggedIn ? (
-                <div className="flex items-center">
-                  <AccountCircle onClick={handleLogout}/>
-                  {/* <button onClick={handleLogout}>Profile</button> */}
-                  {/* <button>Profile</button> */}
+              {userData ? (
+                <div className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
+                  <AccountCircle onClick={toggleSidebar}/>
                 </div>
               ) : (
-                <div className="flex items-center">
+                <div className="flex items-center cursor-pointer hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
                   <AccountCircle
                     onClick={() => setShowLogin(true)}
                     className="mr-1"
@@ -89,15 +85,11 @@ const Navbar = ({ setShowLogin, isLoggedIn, setIsLoggedIn }) => {
                   <button onClick={() => setShowLogin(true)}>Login</button>
                 </div>
               )}
-              {/* <div>
-                <AccountCircle onClick={()=>setShowLogin(true)} className="mr-1" />
-                <button onClick={()=>setShowLogin(true)}>Login</button>
-              </div> */}
-              
             </ul>
           </div>
         </div>
       </div>
+      <SideBar isOpen={isSidebarOpen} onClose={toggleSidebar}/>
     </>
   );
 };
