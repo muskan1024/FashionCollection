@@ -3,12 +3,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import login from "./login.css";
 import axios from "axios";
+import { useUserContext } from "./UserContext";
 
-const Login = ({ setShowLogin,setIsLoggedIn }) => {
+const Login = ({ setShowLogin }) => {
   const [currState, setCurrState] = useState("Login");
   const [errorMessage, setErrorMessage] = useState("");
   const [successmsg, setSuccessmsg] = useState("");
   const history = useNavigate();
+  const {setUserData} = useUserContext();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -29,13 +31,15 @@ const Login = ({ setShowLogin,setIsLoggedIn }) => {
       const response = await axios.post(apiUrl, formData);
       if (response.status === 200) {
         console.log(`${currState} successful`);
+        setUserData(response.data)
+        // console.log(response.data);
         if (currState === "Sign Up") {
           setCurrState("Login");
           setSuccessmsg("Signup successful! Please log in.");
         } else {
           setShowLogin(false);
-          setIsLoggedIn(true);
-          localStorage.setItem("isLoggedIn", true);
+          // setIsLoggedIn(true);
+          // sessionStorage.setItem("isLoggedIn", true);
           history("/");
         }
       } else {

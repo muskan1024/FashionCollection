@@ -6,11 +6,11 @@ import Footer from './Footer'
 import Login from './Login'
 
 const About = () => {
-    const [showLogin,setShowLogin]=useState(false)
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
-    {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
+    {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
       <Navbar setShowLogin={setShowLogin} />
     <br />
     <br />
@@ -86,7 +86,7 @@ const About = () => {
       </div>
     </div>
     <br /><br /><br />
-    <Footer setShowLogin={setShowLogin}/>
+    <Footer/>
     </>
   )
 }

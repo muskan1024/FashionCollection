@@ -11,7 +11,7 @@ const Shop = ({ categ, setCateg }) => {
 
   return (
     <>
-    {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
+      {showLogin?<Login setShowLogin={setShowLogin}/>:<></>}
       <Navbar setShowLogin={setShowLogin} />
       <div className="max-w-[90%] md:max-w-[80%] mx-auto mt-16">
         <div className="cat-list">
@@ -21,7 +21,7 @@ const Shop = ({ categ, setCateg }) => {
                 className="cat-item-list"
                 onClick={() =>
                   setCateg((prev) =>
-                    prev == item.cat_name ? "All" : item.cat_name
+                    prev === item.cat_name ? "All" : item.cat_name
                   )
                 }
                 key={index}
@@ -40,7 +40,7 @@ const Shop = ({ categ, setCateg }) => {
           <br />
       
       </div>
-      <Footer setShowLogin={setShowLogin}/>
+      <Footer/>
           
     </>
   );
