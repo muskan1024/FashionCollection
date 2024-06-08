@@ -6,7 +6,9 @@ const HomeA = () => {
   return (
     <>
       <NavbarA/>
+      <div className='mt-20'>
       <SideBar/>
+      </div>
     </>
   )
 }

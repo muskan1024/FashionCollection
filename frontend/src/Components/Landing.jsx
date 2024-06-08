@@ -6,12 +6,13 @@ import About from "./About";
 import Cart from "./Cart";
 import HomeA from "./Admin/HomeA";
 import LoginA from "./Admin/LoginA";
+import Add from "./Admin/Add";
 
 const Landing = () => {
   const [categ, setCateg] = useState("All");
 
   return (
-    <BrowserRouter>
+    // <BrowserRouter>
       <Routes>
         <Route
           path="/home"
@@ -35,8 +36,9 @@ const Landing = () => {
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/admin/login" element={<LoginA />}></Route>
         <Route path="/admin/home" element={<HomeA />}></Route>
+        <Route path="/admin/addproducts" element={<Add/>}></Route>
       </Routes>
-    </BrowserRouter>
+    // {/* </BrowserRouter> */}
   );
 };
 export default Landing;
