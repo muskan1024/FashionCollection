@@ -8,8 +8,8 @@ const Add = () => {
     <>
       <NavbarA />
       <SideBar />
-      <div className="mt-20">
-      <div className=" m-auto shadow-2xl max-w-2xl bg-slate-50">
+      <div className="mt-20 mx-2">
+      <div className="m-auto shadow-xl shadow-gray-300 max-w-2xl bg-slate-50">
         <h1 className="text-center font-serif font-bold text-red-600 border-b-2 py-2">
           Product Infromation
         </h1>
