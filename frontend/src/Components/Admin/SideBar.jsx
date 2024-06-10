@@ -21,7 +21,7 @@ const SideBar = () => {
 
   return (
     <>
-      <div className="ml-2 mt-1 p-1 cursor-pointer rounded-full hover:bg-gray-200 w-fit border-x-2">
+      <div className="ml-2 mt-3 p-1 cursor-pointer rounded-full hover:bg-gray-200 w-fit border-x-2">
         <Menu onClick={() => setOpen(!isOpen)} />{" "}
       </div>
       <div

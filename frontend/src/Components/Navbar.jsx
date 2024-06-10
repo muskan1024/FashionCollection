@@ -1,14 +1,19 @@
 import { AccountCircle, Menu, Search, ShoppingCart } from "@mui/icons-material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { SideBar } from "./SideBar";
 import { useUserContext } from "./UserContext";
+import { setSearch } from "./redux/slices/SearchSlice";
+import { useDispatch } from "react-redux";
+
 
 const Navbar = ({ setShowLogin }) => {
   // const [menu, setMenu] = useState("home");
   const { userData } = useUserContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -43,6 +48,7 @@ const Navbar = ({ setShowLogin }) => {
                 type="text"
                 placeholder="Search.."
                 className="outline-none "
+                onChange={(e) => dispatch(setSearch(e.target.value))}
               />
               <Search />
             </div>
@@ -68,13 +74,16 @@ const Navbar = ({ setShowLogin }) => {
               >
                 Shop
               </NavLink>
-              <Link to="/cart" className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
-                <ShoppingCart/>
+              <Link
+                to="/cart"
+                className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
+              >
+                <ShoppingCart />
               </Link>
-              
+
               {userData ? (
                 <div className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
-                  <AccountCircle onClick={toggleSidebar}/>
+                  <AccountCircle onClick={toggleSidebar} />
                 </div>
               ) : (
                 <div className="flex items-center cursor-pointer hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
@@ -89,7 +98,7 @@ const Navbar = ({ setShowLogin }) => {
           </div>
         </div>
       </div>
-      <SideBar isOpen={isSidebarOpen} onClose={toggleSidebar}/>
+      <SideBar isOpen={isSidebarOpen} onClose={toggleSidebar} />
     </>
   );
 };

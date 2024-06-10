@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const NavbarA = () => {
   return (
     <>
-      <div className="flex justify-between text-center p-5 border-b-2 z-20">
+      <div className="flex justify-between text-center p-5 z-20 shadow-md">
         <div className="w-max-(10%,80px)">
           <Link
             to="/admin/home"
