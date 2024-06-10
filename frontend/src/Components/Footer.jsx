@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className=" grid grid-col grid-cols-1 sm:grid-cols-2 md:grid-cols-4 mt-5 bg-slate-300 p-3 gap-3 sm:gap-8 ">
-      <div className="">
+    <div className="p-10 grid grid-col grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-5 bg-gray-800 text-white gap-3 sm:gap-8 ">
+      <div className="pb-3">
         <Link to="/" className="flex gap-1 pb-2 items-center font-bold">
-          <img src="/images/fc-logo.png" alt="" className="w-5 " />
+          <img src="/images/fc-logo.png" alt="" className="w-12 bg-white px-2 p-1 rounded-full " />
           <span className=" text-red-600 ">FASHION </span>
           <span> COLLECTION</span>
         </Link>
@@ -23,22 +23,22 @@ const Footer = () => {
           occasion, from formal wear to casual attire.
         </p>
       </div>
-      <hr className="border-[1px] border-gray-400 block sm:hidden"/>
-      <div>
+      {/* <hr className="border-[1px] border-gray-400 block sm:hidden"/> */}
+      <div className="pb-3">
         <h1 className="font-semibold mb-1">Contact Us:</h1>
         <div className="text-[14px] text-wrap">
           <ul className="pb-1">
             <LocalPhone sx={{ fontSize: 15 }} />{" "}
             <a
               href="tel:+918855023555"
-              className="hover:text-blue-700 hover:font-semibold"
+              className="hover:text-cyan-500 hover:font-semibold"
             >
               +918855023555
             </a>{" "}
             |{" "}
             <a
               href="tel:+919881987778"
-              className="hover:text-blue-700 hover:font-semibold"
+              className="hover:text-cyan-500 hover:font-semibold"
             >
               +919881987778
             </a>
@@ -47,7 +47,7 @@ const Footer = () => {
             <Mail sx={{ fontSize: 15 }} />
             <a
               href="mailto:fashionmenswear81019@gmail.com"
-              className="hover:text-blue-700 hover:font-semibold"
+              className="hover:text-cyan-500 hover:font-semibold"
             >
               fashionmenswear81019@gmail.com
             </a>
@@ -56,16 +56,16 @@ const Footer = () => {
             <WhatsApp sx={{ fontSize: 15 }} /> 
             <a
               href="https://api.whatsapp.com/send?phone=+918857831831"
-              className="hover:text-blue-700 hover:font-semibold pb-1"
+              className="hover:text-cyan-500 hover:font-semibold pb-1"
             >+918857831831</a>
           </ul>
         </div>
       </div>
-      <hr className="border-[1px] border-gray-400 block sm:hidden"/>
+      {/* <hr className="border-[1px] border-gray-400 block sm:hidden"/> */}
 
-      <div>
+      <div className="pb-3">
         <p className="font-semibold">Address:</p>
-        <p className="underline text-blue-700 font-medium">
+        <p className="underline text-cyan-500 font-medium">
           <Place sx={{ fontSize: 17 }} />
           <a
             target="blank"
@@ -76,9 +76,9 @@ const Footer = () => {
           </a>
         </p>
       </div>
-      <hr className="border-[1px] border-gray-400 block sm:hidden"/>
+      {/* <hr className="border-[1px] border-gray-400 block sm:hidden"/> */}
 
-      <div className="grid gap-2">
+      {/* <div className="grid gap-2">
         <Link to="/" className="hover:border-b-2 hover:border-red-500 w-fit">
           Home
         </Link>
@@ -86,7 +86,7 @@ const Footer = () => {
           Shop
         </Link>
         <Link to="/about" className="hover:border-b-2 hover:border-red-500 w-fit">About Us</Link>
-      </div>
+      </div> */}
     </div>
   );
 };
