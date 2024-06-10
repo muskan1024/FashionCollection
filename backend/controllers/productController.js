@@ -25,12 +25,20 @@ async function saveProduct(req, res) {
 
 async function getProducts(req, res) {
   try {
-    const products = await Product.find().sort({createdAt: -1}) ;
+    const { category } = req.query;
+    let query = {};
+
+    if (category) {
+      query.category = category;
+    }
+
+    const products = await Product.find(query).sort({ createdAt: -1 });
     res.json(products);
   } catch (error) {
     console.error("Error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
 
 module.exports = { saveProduct, getProducts };

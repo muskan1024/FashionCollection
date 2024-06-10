@@ -6,14 +6,12 @@ import { useUserContext } from "./UserContext";
 import { setSearch } from "./redux/slices/SearchSlice";
 import { useDispatch } from "react-redux";
 
-
 const Navbar = ({ setShowLogin }) => {
   // const [menu, setMenu] = useState("home");
   const { userData } = useUserContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
-
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -88,10 +86,20 @@ const Navbar = ({ setShowLogin }) => {
               ) : (
                 <div className="flex items-center cursor-pointer hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
                   <AccountCircle
-                    onClick={() => setShowLogin(true)}
+                    onClick={() => {
+                      setShowLogin(true);
+                      window.scrollTo(0, 0);
+                    }}
                     className="mr-1"
                   />
-                  <button onClick={() => setShowLogin(true)}>Login</button>
+                  <button
+                    onClick={() => {
+                      setShowLogin(true);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    Login
+                  </button>
                 </div>
               )}
             </ul>

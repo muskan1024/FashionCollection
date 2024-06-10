@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const ProductCard = ({ product }) => {
 //   const [products, setProducts] = useState(products1 || []);
@@ -35,7 +34,7 @@ const ProductCard = ({ product }) => {
     {/* // <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2"> */}
       {/* {products.map((product) => (
         <> */}
-          <div className="shadow-md hover:shadow-lg cursor-pointer rounded-sm sm:max-w-56">
+          <div className="shadow-md hover:shadow-lg cursor-pointer rounded-sm ">
             <img src={product.image} className="object-cover h-40 mx-auto" />
             <div className="p-2">
               <h1 className="text-center font-bold text-red-500">
