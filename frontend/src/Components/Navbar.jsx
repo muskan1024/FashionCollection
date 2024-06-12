@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { SideBar } from "./SideBar";
 import { useUserContext } from "./UserContext";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import shop from "./shop.css";
 
@@ -13,7 +12,6 @@ const Navbar = ({ setShowLogin }) => {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const dispatch = useDispatch();
   const history = useNavigate();
 
   const toggleSidebar = () => {
