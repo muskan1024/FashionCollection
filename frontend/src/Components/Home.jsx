@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 import shop from "./shop.css";
+import { Search } from "@mui/icons-material";
 import { category_list } from "../assets/assets";
 import Login from "./Login";
 import Footer from "./Footer";
@@ -11,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 const Home = ({ categ, setCateg }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [topProducts, setTopProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const history = useNavigate();
   useEffect(() => {
     axios
@@ -28,6 +31,17 @@ const Home = ({ categ, setCateg }) => {
       history("/shop");
     } else {
       history(`/shop/${categoryName}`);
+    }
+
+  };
+
+  const handleSearch = (e) => {
+    // dispatch(setSearch(searchQuery.trim()));
+    history(`/search-results?q=${encodeURIComponent(searchQuery.trim())}`);
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
   return (
@@ -84,12 +98,12 @@ const Home = ({ categ, setCateg }) => {
 
               <div className="mt-24 ">
                 <div className="  text-2xl">BRANDS WE CARRY. </div>
-                <div className="flex  mt-3  justify-between gap-5  text-center overflow-x-scroll cat-list mb-6">
-                <img className="w-52  grayscale hover:grayscale-0 transi" src="/images/RaymondLogo.jpg" alt="" />
-                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/siyaram.png" alt="" />
-                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/lenenClub.png" alt="" />
-                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/OCM.png" alt="" />
-                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/gwaliar.png" alt="" />
+                <div className="flex  mt-3  justify-between gap-10  text-center overflow-x-scroll cat-list mb-6">
+                <img className=" onClick={handleSearch} h-80 w-60  grayscale hover:grayscale-0 transi" src="/images/RaymondLogo.jpg" alt="" />
+                <img className=" onClick={handleSearch} h-80  w-60 grayscale hover:grayscale-0 transi" src="/images/siyaram.png" alt="" />
+                <img className=" onClick={handleSearch} h-80  w-60 grayscale hover:grayscale-0 transi" src="/images/lenenClub.png" alt="" />
+                <img className=" onClick={handleSearch} h-80  w-60 grayscale hover:grayscale-0 transi" src="/images/OCM.png" alt="" />
+                <img className=" onClick={handleSearch} h-80  w-60 grayscale hover:grayscale-0 transi" src="/images/gwaliar.png" alt="" />
                 </div>
               </div>
 
