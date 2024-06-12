@@ -6,7 +6,10 @@ const app = express();
 
 const connectionString = "mongodb+srv://shaikhmuskan1024:muskan@cluster0.lpvvshc.mongodb.net/FashionCollection"
 mongoose
-  .connect(connectionString)
+  .connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then((res) => console.log("Connected to FashionCollection db successfully"))
   .catch((ex) => console.log(ex));
 

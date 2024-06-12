@@ -4,12 +4,19 @@ import shop from "./shop.css";
 import { category_list } from "../assets/assets";
 import Login from "./Login";
 import Footer from "./Footer";
-import ProductCard from "./Product/ProductCard";
 import ProductList from "./Product/ProductList";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Shop = ({ categ, setCateg }) => {
+const Shop = () => {
+  const { category: initialCategory } = useParams();
   const [showLogin, setShowLogin] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory || "All");
+  const history = useNavigate();
 
+  const handleCategoryClick = (catName) => {
+    setSelectedCategory(catName);
+    history(`/shop/${catName}`)
+  };
   return (
     <>
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
@@ -20,15 +27,11 @@ const Shop = ({ categ, setCateg }) => {
             return (
               <div
                 className="cat-item-list"
-                onClick={() =>
-                  setCateg((prev) =>
-                    prev === item.cat_name ? "All" : item.cat_name
-                  )
-                }
+                onClick={() => handleCategoryClick(item.cat_name)}
                 key={index}
               >
                 <img
-                  className={categ === item.cat_name ? "active" : ""}
+                  className={selectedCategory === item.cat_name ? "active" : ""}
                   src={item.cat_image}
                   alt=""
                 />
@@ -38,7 +41,7 @@ const Shop = ({ categ, setCateg }) => {
           })}
         </div>
         <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-          <ProductList />
+          <ProductList category={selectedCategory === "All" ? null : selectedCategory}/>
         </div>
         <br />
         <br />

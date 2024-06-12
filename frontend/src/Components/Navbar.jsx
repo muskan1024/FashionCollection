@@ -1,22 +1,67 @@
 import { AccountCircle, Menu, Search, ShoppingCart } from "@mui/icons-material";
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { SideBar } from "./SideBar";
 import { useUserContext } from "./UserContext";
-import { setSearch } from "./redux/slices/SearchSlice";
 import { useDispatch } from "react-redux";
-
+import axios from "axios";
+import shop from "./shop.css";
 
 const Navbar = ({ setShowLogin }) => {
-  // const [menu, setMenu] = useState("home");
   const { userData } = useUserContext();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [open, setOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const dispatch = useDispatch();
-
+  const history = useNavigate();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const handleInputChange = async (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+    if (query.trim() === "") {
+      setSuggestions([]);
+      return;
+    }
+    try {
+      const response = await axios.get(
+        `http://localhost:3002/api/products/suggestions?q=${query}`
+      );
+      const processedSuggestions = response.data
+        .filter(
+          (suggestion) =>
+            suggestion.brand.toLowerCase().includes(query.toLowerCase()) ||
+            suggestion.category.toLowerCase().includes(query.toLowerCase())
+        )
+        .map((suggestion) => ({
+          brand: suggestion.brand,
+          category: suggestion.category,
+        }));
+      setSuggestions(processedSuggestions);
+    } catch (error) {
+      console.error("Error fetching search suggestions:", error);
+    }
+  };
+
+  const handleSuggestionClick = (suggestion) => {
+    const suggestionText = `${suggestion.brand} ${suggestion.category}`;
+    setSearchQuery(suggestionText);
+    setSuggestions([]);
+    history(`/search-results?q=${encodeURIComponent(suggestionText)}`);
+  };
+
+  const handleSearch = (e) => {
+    // dispatch(setSearch(searchQuery.trim()));
+    history(`/search-results?q=${encodeURIComponent(searchQuery.trim())}`);
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   };
 
   return (
@@ -43,14 +88,35 @@ const Navbar = ({ setShowLogin }) => {
             } w-full grid col-span-2 grid-flow-row md:grid md:grid-flow-col gap-4 justify-evenly`}
           >
             {/* Search Bar */}
-            <div className="flex border-b-[1.5px] border-black bg-white">
+            <div className="relative flex border-b-[1.5px] border-black bg-white w-full">
               <input
                 type="text"
                 placeholder="Search.."
-                className="outline-none "
-                onChange={(e) => dispatch(setSearch(e.target.value))}
+                className="outline-none"
+                value={searchQuery}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyPress}
               />
-              <Search />
+              <Search className="cursor-pointer" onClick={handleSearch} />
+
+              {suggestions.length > 0 && (
+                <ul className="absolute top-full left-0 right-0 bg-white border border-gray-300 z-10 list-none max-h-60 overflow-y-auto cat-list">
+                  {suggestions.map((suggestion, index) => (
+                    <li
+                      key={index}
+                      className="p-2 cursor-pointer hover:bg-gray-200 border-b-[1px] "
+                      onClick={() => handleSuggestionClick(suggestion)}
+                    >
+                      <div className="">
+                        {suggestion.brand}{" "}
+                        <span className="text-sm text-gray-600">
+                          in {suggestion.category}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
             {/* Menu Bar */}
             <ul className="flex gap-5 text-sm md:text-lg ">
@@ -58,7 +124,7 @@ const Navbar = ({ setShowLogin }) => {
                 to="/"
                 className={({ isActive }) =>
                   isActive
-                    ? "border-b-2 border-slate-400  ease-in duration-300"
+                    ? "border-b-2 border-slate-400 ease-in duration-300"
                     : "hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
                 }
               >
@@ -68,7 +134,7 @@ const Navbar = ({ setShowLogin }) => {
                 to="/shop"
                 className={({ isActive }) =>
                   isActive
-                    ? "border-b-2 border-slate-400  ease-in duration-300"
+                    ? "border-b-2 border-slate-400 ease-in duration-300"
                     : "hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
                 }
               >
@@ -88,10 +154,20 @@ const Navbar = ({ setShowLogin }) => {
               ) : (
                 <div className="flex items-center cursor-pointer hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
                   <AccountCircle
-                    onClick={() => setShowLogin(true)}
+                    onClick={() => {
+                      setShowLogin(true);
+                      window.scrollTo(0, 0);
+                    }}
                     className="mr-1"
                   />
-                  <button onClick={() => setShowLogin(true)}>Login</button>
+                  <button
+                    onClick={() => {
+                      setShowLogin(true);
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    Login
+                  </button>
                 </div>
               )}
             </ul>
