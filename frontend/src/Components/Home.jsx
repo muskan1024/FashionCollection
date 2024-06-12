@@ -81,6 +81,18 @@ const Home = ({ categ, setCateg }) => {
               ))}
           </div>
         </div>
+
+              <div className="mt-8 ">
+                <div className="  text-2xl">BRANDS WE CARRY. </div>
+                <div className="flex  mt-3  justify-between gap-5  text-center overflow-x-scroll cat-list mb-6">
+                <img className="w-52  grayscale hover:grayscale-0 transi" src="/images/RaymondLogo.jpg" alt="" />
+                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/siyaram.png" alt="" />
+                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/lenenClub.png" alt="" />
+                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/OCM.png" alt="" />
+                <img className="w-52 grayscale hover:grayscale-0 transi" src="/images/gwaliar.png" alt="" />
+                </div>
+              </div>
+
       </div>
       <Footer />
     </>

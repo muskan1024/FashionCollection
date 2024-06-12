@@ -140,12 +140,17 @@ const Navbar = ({ setShowLogin }) => {
               >
                 Shop
               </NavLink>
-              <Link
+              <NavLink
                 to="/cart"
-                className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
+                // className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
+                className={({ isActive }) =>
+                  isActive
+                    ? "border-b-2 border-slate-400 ease-in duration-300"
+                    : "hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
+                }
               >
                 <ShoppingCart />
-              </Link>
+              </NavLink>
 
               {userData ? (
                 <div className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
