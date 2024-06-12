@@ -42,7 +42,7 @@ const Home = ({ categ, setCateg }) => {
           alt="baner"
           className="rounded-lg justify-self-center w-[100%] mt-5"
         />
-        <h1 className="-mb-2 mt-8 font-thin text-3xl ">
+        <h1 className="-mb-2 mt-20 font-thin text-3xl ">
           Explore By Categories
         </h1>
         <div className="px-5 lg:px-10 flex justify-between gap-5 items-center text-center overflow-x-scroll cat-list mb-6">
@@ -70,7 +70,7 @@ const Home = ({ categ, setCateg }) => {
           })}
         </div>
         <div className="">
-          <div className="mb-5 font-serif text-3xl ">Latest Collection</div>
+          <div className="mb-5 font-serif text-3xl mt-20">Latest Collection</div>
           <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
             {topProducts
               .filter(
@@ -82,7 +82,7 @@ const Home = ({ categ, setCateg }) => {
           </div>
         </div>
 
-              <div className="mt-8 ">
+              <div className="mt-24 ">
                 <div className="  text-2xl">BRANDS WE CARRY. </div>
                 <div className="flex  mt-3  justify-between gap-5  text-center overflow-x-scroll cat-list mb-6">
                 <img className="w-52  grayscale hover:grayscale-0 transi" src="/images/RaymondLogo.jpg" alt="" />
