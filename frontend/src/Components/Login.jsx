@@ -32,15 +32,12 @@ const Login = ({ setShowLogin }) => {
       if (response.status === 200) {
         console.log(`${currState} successful`);
         setUserData(response.data)
-        // console.log(response.data);
         if (currState === "Sign Up") {
           setCurrState("Login");
           setSuccessmsg("Signup successful! Please log in.");
         } else {
           setShowLogin(false);
-          // setIsLoggedIn(true);
-          // sessionStorage.setItem("isLoggedIn", true);
-          history("/");
+          history("/home");
         }
       } else {
         console.error(`${currState} failed`);

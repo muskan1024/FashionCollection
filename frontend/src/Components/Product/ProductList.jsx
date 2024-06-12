@@ -5,18 +5,7 @@ import ProductCard from "./ProductCard";
 const ProductList = ({ category }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3002/api/products")
-  //     .then((response) => {
-  //       setProducts(response.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setLoading(false);
-  //     });
-  // }, []);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -42,6 +31,7 @@ const ProductList = ({ category }) => {
       </div>
     );
   }
+
   return (
     <>
       {products.map((product) => (

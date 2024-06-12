@@ -11,12 +11,11 @@ import { useNavigate } from "react-router-dom";
 const Home = ({ categ, setCateg }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [topProducts, setTopProducts] = useState([]);
- const history = useNavigate();
+  const history = useNavigate();
   useEffect(() => {
     axios
       .get("http://localhost:3002/api/products")
       .then((response) => {
-        // Use slice method to get the top 4 products
         const top4 = response.data.slice(0, 8);
         setTopProducts(top4);
       })
@@ -26,13 +25,11 @@ const Home = ({ categ, setCateg }) => {
   }, []);
   const handleCategoryClick = (categoryName) => {
     if (categoryName === "All") {
-      history("/shop"); // Redirect to the Shop page without specifying a category
+      history("/shop");
     } else {
-      history(`/shop/${categoryName}`); // Redirect to the Shop page with the selected category
+      history(`/shop/${categoryName}`);
     }
-
   };
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
       {/* {showLogin?<Login setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />:<></>}

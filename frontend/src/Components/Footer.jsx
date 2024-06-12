@@ -22,7 +22,6 @@ const Footer = () => {
           occasion, from formal wear to casual attire.
         </p>
       </div>
-      {/* <hr className="border-[1px] border-gray-400 block sm:hidden"/> */}
       <div className="pb-3 grid gap-3">
         <div>
           <h1 className="font-semibold mb-1">Contact Us:</h1>

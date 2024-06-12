@@ -7,7 +7,7 @@ import Footer from "./Footer";
 import ProductList from "./Product/ProductList";
 import { useNavigate, useParams } from "react-router-dom";
 
-const Shop = ({ categ, setCateg }) => {
+const Shop = () => {
   const { category: initialCategory } = useParams();
   const [showLogin, setShowLogin] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory || "All");
@@ -27,12 +27,6 @@ const Shop = ({ categ, setCateg }) => {
             return (
               <div
                 className="cat-item-list"
-                // onClick={() =>
-                //   setCateg((prev) =>
-                //     prev === item.cat_name ? "All" : item.cat_name
-                //   )
-                // }
-                // onClick={() => setCateg(item.cat_name)}
                 onClick={() => handleCategoryClick(item.cat_name)}
                 key={index}
               >
