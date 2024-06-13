@@ -51,7 +51,7 @@ const Home = ({ categ, setCateg }) => {
         <h1 className="-mb-2 mt-8 font-thin text-3xl ">
           Explore By Categories
         </h1>
-        <div className="px-5 lg:px-10 flex justify-between gap-5 items-center text-center overflow-x-scroll cat-list mb-6">
+        <div className="px-5 lg:px-10 flex justify-between gap-5 items-center text-center overflow-x-scroll scroll-auto cat-list mb-6">
           {category_list.map((item, index) => {
             return (
               <div
