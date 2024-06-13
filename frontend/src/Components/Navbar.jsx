@@ -121,7 +121,7 @@ const Navbar = ({ setShowLogin }) => {
             {/* Menu Bar */}
             <ul className="flex gap-5 text-sm md:text-lg ">
               <NavLink
-                to="/"
+                to="/home"
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-2 border-slate-400 ease-in duration-300"
