@@ -121,5 +121,54 @@ async function getProductById(req, res) {
   res.send(product);
 }
 
+async function getRelatedProducts(req, res){
+  const {category, brand, exclude} = req.query;
+  
+  let query ={};
+  if(category){
+    query.category = category;
+  }
+  if(brand){
+    query.brand = brand;
+  }
+  if(exclude){
+    query._id = {$ne: exclude};
+  }
 
-module.exports = { saveProduct, getProducts, getSuggestions, searchProducts, getProductById };
+  try{
+    const products = await Product.find(query);
+    res.json(products);
+  }catch(error){
+    res.status(500).json({error: error.message})
+  }
+}
+
+
+module.exports = { saveProduct, getProducts, getSuggestions, searchProducts, getProductById, getRelatedProducts };
+
+// useEffect(() => {
+//   const fetchProduct = async () => {
+//     try {
+//       const response = await axios.get(`http://localhost:3002/api/products/${id}`);
+//       setProduct(response.data);
+//       setLoading(false);
+
+//       // Fetch related products based on category or brand
+//       if (response.data.category || response.data.brand) {
+//         const relatedResponse = await axios.get(`http://localhost:3002/api/products/related`, {
+//           params: {
+//             category: response.data.category,
+//             brand: response.data.brand,
+//             exclude: id,
+//           },
+//         });
+//         setRelatedProducts(relatedResponse.data);
+//       }
+//     } catch (error) {
+//       console.log("Error fetching products:", error);
+//       setLoading(false);
+//     }
+//   };
+
+//   fetchProduct();
+// }, [id]);
