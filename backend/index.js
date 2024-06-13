@@ -1,6 +1,6 @@
 const express = require("express");
 const { userSignIn, userSignUp } = require("./controllers/userController");
-const { saveProduct, getProducts, getSuggestions, searchProducts } = require("./controllers/productController");
+const { saveProduct, getProducts, getSuggestions, searchProducts, getProductById } = require("./controllers/productController");
 const multer = require("multer");
 const router = express.Router();
 const cloudinary = require("cloudinary").v2;
@@ -23,5 +23,6 @@ router.post("/api/auth/admin/products", upload.single("image"), saveProduct);
 router.get("/api/products", getProducts);
 router.get("/api/products/suggestions", getSuggestions);
 router.get("/api/products/search", searchProducts);
+router.get("/api/products/:id", getProductById);
 
 module.exports = router;

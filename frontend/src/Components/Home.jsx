@@ -8,10 +8,12 @@ import Footer from "./Footer";
 import ProductCard from "./Product/ProductCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 const Home = ({ categ, setCateg }) => {
   const [showLogin, setShowLogin] = useState(false);
   const [topProducts, setTopProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
   const history = useNavigate();
@@ -21,11 +23,14 @@ const Home = ({ categ, setCateg }) => {
       .then((response) => {
         const top4 = response.data.slice(0, 8);
         setTopProducts(top4);
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
+        setLoading(true);
       });
   }, []);
+
   const handleCategoryClick = (categoryName) => {
     if (categoryName === "All") {
       history("/shop");
@@ -86,13 +91,17 @@ const Home = ({ categ, setCateg }) => {
         <div className="">
           <div className="mb-8 font-serif text-3xl mt-10 text-slate-800 font-semibold ">Latest <span className="text-slate-600">Collection.</span></div>
           <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
-            {topProducts
-              .filter(
-                (product) => categ === "All" || product.category === categ
-              )
-              .map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
+            {loading ? (
+              <Loading />
+            ) : (
+              topProducts
+                .filter(
+                  (product) => categ === "All" || product.category === categ
+                )
+                .map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))
+            )}
           </div>
         </div>
 

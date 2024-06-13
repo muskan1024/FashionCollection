@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import SearchSlice from "./slices/SearchSlice";
+// import { configureStore } from "@reduxjs/toolkit";
+// import SearchSlice from "./slices/SearchSlice";
 
-const Store = configureStore({
-    reducer:{
-        search: SearchSlice
-    }
-});
-export default Store;
+// const Store = configureStore({
+//     reducer:{
+//         search: SearchSlice
+//     }
+// });
+// export default Store;

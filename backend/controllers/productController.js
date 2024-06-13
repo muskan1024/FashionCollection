@@ -110,5 +110,16 @@ async function getSuggestions(req, res) {
   }
 }
 
+async function getProductById(req, res) {
+  let product = await Product.findById(req.params.id);
 
-module.exports = { saveProduct, getProducts, getSuggestions, searchProducts };
+  if (!product) {
+    res.status(404).send(`Product with id ${req.params.id} not found`);
+    return;
+  }
+
+  res.send(product);
+}
+
+
+module.exports = { saveProduct, getProducts, getSuggestions, searchProducts, getProductById };
