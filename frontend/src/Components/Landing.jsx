@@ -10,6 +10,7 @@ import { UserProvider } from "./UserContext";
 import Add from "./Admin/Add";
 import ScrollToTop from "./ScrollToTop";
 import SearchResult from "./Product/SearchResult";
+import ProductDetails from "./Product/ProductDetails";
 
 const Landing = () => {
   const [categ, setCateg] = useState("All");
@@ -37,6 +38,7 @@ const Landing = () => {
             path="/shop/:category"
             element={<Shop categ={categ} setCateg={setCateg} />}
           ></Route>
+          <Route path="/shop/products/:id" element={<ProductDetails/>}></Route>
           <Route path="/search-results" element={<SearchResult/>}></Route>
           <Route path="/about" element={<About />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
