@@ -7,6 +7,7 @@ import { ShoppingCartOutlined } from "@mui/icons-material";
 import Footer from "../Footer";
 import ProductCard from "./ProductCard";
 import Loading from "../Loading";
+import shop from '../shop.css';
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -74,8 +75,8 @@ const ProductDetails = () => {
     <>
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
       <Navbar setShowLogin={setShowLogin} />
-      <div className="mt-20 max-w-[90%] md:max-w-[80%] mx-auto">
-        <div className="grid sm:flex gap-10 ">
+      <div className="mt-20 max-w-[90%] sm:max-w-[95%] md:max-w-[90%] lg:max-w-[80%] mx-auto">
+        <div className="grid sm:flex gap-10 md:gap-5 lg:gap-10 ">
           <img
             src={product.image}
             alt="Product Image"
@@ -98,7 +99,7 @@ const ProductDetails = () => {
               </span>
             </div>
             <div></div>
-            <div className="flex gap-5 my-5">
+            <div className="grid lg:flex gap-3 lg:gap-5 my-5">
               <button className="w-full py-2 bg-slate-500 text-white font-semibold rounded-lg hover:shadow-md hover:shadow-gray-400">
                 <ShoppingCartOutlined className="mr-2" /> Add to Cart
               </button>
@@ -124,10 +125,10 @@ const ProductDetails = () => {
           <h2 className="text-base sm:text-xl font-semibold mb-5">
             Products Related to this Item
           </h2>
-          <div className="grid gap-2 sm:gap-5 justify-items-center grid-flow-col overflow-x-scroll sm:pl-5 scroll-auto scroll-m-2">
+          <div id="brand" className="brand grid gap-3 sm:gap-5 justify-items-center grid-flow-col sm:pl-5 scroll-m-2">
             {/* lg:grid-cols-4 md:grid-cols-3 grid-cols-2 */}
             {relatedProducts.map((relatedProduct) => (
-              <div className="w-52 h-full pb-3">
+              <div className="w-56 h-full pb-3">
                 <ProductCard
                   key={relatedProduct._id}
                   product={relatedProduct}
@@ -137,8 +138,8 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="">
-          <div className="mb-5 font-serif text-3xl ">Latest Collection</div>
-          <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+          <div className="mb-5 font-serif text-xl sm:text-2xl mt-10">Recommended Products</div>
+          <div className="grid gap-2 sm:gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
             {loading ? (
               <Loading />
             ) : (

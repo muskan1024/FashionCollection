@@ -90,7 +90,7 @@ const Home = ({ categ, setCateg }) => {
         </div>
         <div className="">
           <div className="mb-8 font-serif text-3xl mt-10 text-slate-800 font-semibold ">Latest <span className="text-slate-600">Collection.</span></div>
-          <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+          <div className="grid gap-2 sm:gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
             {loading ? (
               <Loading />
             ) : (

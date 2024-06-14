@@ -40,7 +40,7 @@ const Shop = () => {
             );
           })}
         </div>
-        <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
+        <div className="grid gap-2 sm:gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
           <ProductList category={selectedCategory === "All" ? null : selectedCategory}/>
         </div>
         <br />
