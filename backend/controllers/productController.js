@@ -1,5 +1,7 @@
 const cloudinary = require("cloudinary").v2;
 const { Product } = require("../models/product");
+const mongoose = require("mongoose");
+
 
 async function saveProduct(req, res) {
   const { ...productData } = req.body;
@@ -110,5 +112,70 @@ async function getSuggestions(req, res) {
   }
 }
 
+async function getProductById(req, res) {
+  let product = await Product.findById(req.params.id);
 
-module.exports = { saveProduct, getProducts, getSuggestions, searchProducts };
+  if (!product) {
+    res.status(404).send(`Product with id ${req.params.id} not found`);
+    return;
+  }
+
+  res.send(product);
+}
+
+// async function getRelatedProducts(req, res){
+//   const {category, brand, exclude} = req.query;
+  
+//   let query ={};
+//   if(category){
+//     query.category = category;
+//   }
+//   if(brand){
+//     query.brand = brand;
+//   }
+//   if(exclude){
+//     query.id = {$ne: exclude};
+//   }
+
+//   try{
+//     const products = await Product.find(query);
+//     res.json(products);
+//   }catch(error){
+//     res.status(500).json({error: error.message})
+//   }
+// }
+
+async function getRelatedProducts(req, res) {
+  try {
+    const { category, brand, exclude } = req.query;
+    const filter = {
+      $or: []
+    };
+
+    if (category) {
+      filter.$or.push({ category });
+    }
+
+    if (brand) {
+      filter.$or.push({ brand });
+    }
+
+    // Exclude the current product
+    if (exclude) {
+      filter._id = { $ne: mongoose.Types.ObjectId(exclude) };
+    }
+    // if (exclude && mongoose.isValidObjectId(exclude)) {
+    //   filter._id = { $ne: mongoose.Types.ObjectId(exclude) };
+    // }
+
+    const relatedProducts = await Product.find(filter); // Limit to 4 related products
+    res.json(relatedProducts);
+  } catch (error) {
+    console.error("Error fetching related products:", error);
+    res.status(500).json({ error: "Error fetching related products" });
+  }
+}
+
+
+module.exports = { saveProduct, getProducts, getSuggestions, searchProducts, getProductById, getRelatedProducts };
+

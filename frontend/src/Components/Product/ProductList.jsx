@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
+import Loading from "../Loading";
 
 const ProductList = ({ category }) => {
   const [products, setProducts] = useState([]);
@@ -18,25 +19,25 @@ const ProductList = ({ category }) => {
         setLoading(false);
       } catch (error) {
         console.log(error);
-        setLoading(false);
+        setLoading(true);
       }
     };
     fetchProducts();
   }, [category]);
 
-  if (loading) {
-    return (
-      <div className="bg-gray-200 border-[1px] border-gray-700 rounded-md  font-bold p-10 m-10 text-xl">
-        Loading...
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return <Loading />;
+  // }
 
   return (
     <>
-      {products.map((product) => (
-        <ProductCard key={product._id} product={product} />
-      ))}
+      {loading ? (
+        <Loading />
+      ) : (
+        products.map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))
+      )}
     </>
   );
 };

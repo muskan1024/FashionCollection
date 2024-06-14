@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { SideBar } from "./SideBar";
 import { useUserContext } from "./UserContext";
-import { useDispatch } from "react-redux";
 import axios from "axios";
 import shop from "./shop.css";
 
@@ -13,7 +12,6 @@ const Navbar = ({ setShowLogin }) => {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const dispatch = useDispatch();
   const history = useNavigate();
 
   const toggleSidebar = () => {
@@ -121,7 +119,7 @@ const Navbar = ({ setShowLogin }) => {
             {/* Menu Bar */}
             <ul className="flex gap-5 text-sm md:text-lg ">
               <NavLink
-                to="/"
+                to="/home"
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-2 border-slate-400 ease-in duration-300"
@@ -140,12 +138,17 @@ const Navbar = ({ setShowLogin }) => {
               >
                 Shop
               </NavLink>
-              <Link
+              <NavLink
                 to="/cart"
-                className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
+                // className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
+                className={({ isActive }) =>
+                  isActive
+                    ? "border-b-2 border-slate-400 ease-in duration-300"
+                    : "hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
+                }
               >
                 <ShoppingCart />
-              </Link>
+              </NavLink>
 
               {userData ? (
                 <div className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100">
