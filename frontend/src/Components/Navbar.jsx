@@ -55,10 +55,12 @@ const Navbar = ({ setShowLogin }) => {
   const handleSearch = (e) => {
     // dispatch(setSearch(searchQuery.trim()));
     history(`/search-results?q=${encodeURIComponent(searchQuery.trim())}`);
+    setSuggestions([]);
   };
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
       handleSearch();
+      setSuggestions([]);
     }
   };
 

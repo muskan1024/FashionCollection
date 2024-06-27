@@ -1,3 +1,33 @@
+.swiper-pagination {
+    background-color: white;
+    margin-bottom: -8px;
+}
+
+.swiper-pagination-bullet {
+    background-color: black !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: black !important;
+    opacity: 1 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    color: black !important;
+    background: gainsboro !important;
+    border-radius: 10%;
+    width: 20px !important;
+    height: 30px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 25px !important;
+}
+
 .cat-list::-webkit-scrollbar {
     display: none;
 }
@@ -9,7 +39,7 @@
 
 .brand {
     overflow-x: scroll;
-border-radius: 10px;
+    border-radius: 10px;
 }
 
 .brand::-webkit-scrollbar {
@@ -18,7 +48,7 @@ border-radius: 10px;
 
 .brand::-webkit-scrollbar-track {
     background-color: hsl(260, 3%, 81%);
-border-radius: 8px;
+    border-radius: 8px;
 }
 
 .brand::-webkit-scrollbar-thumb {

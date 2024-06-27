@@ -1,13 +1,25 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Login from "../Login";
 import Navbar from "../Navbar";
 import { ShoppingCartOutlined } from "@mui/icons-material";
 import Footer from "../Footer";
 import ProductCard from "./ProductCard";
 import Loading from "../Loading";
-import shop from '../shop.css';
+import { Swiper, SwiperSlide } from "swiper/react";
+import {
+  FreeMode,
+  Keyboard,
+  Navigation,
+  Pagination,
+  Scrollbar,
+} from "swiper/modules";
+import "swiper/swiper-bundle.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import shop from "../shop.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -17,12 +29,10 @@ const ProductDetails = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]);
   let sentences = [];
+  const [selectedImage, setSelectedImage] = useState("");
 
-  //   Check if product.description exists before splitting
   if (product.description) {
-    // Check if description contains a period
     if (product.description.includes(".")) {
-      // Split the description by periods and filter out any empty strings
       sentences = product.description
         .split(".")
         .filter((sentence) => sentence.trim().length > 0);
@@ -36,6 +46,7 @@ const ProductDetails = () => {
       .get(`http://localhost:3002/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
+        setSelectedImage(response.data.image[0]);
         fetchRelatedProducts(response.data);
       })
       .catch((error) => {
@@ -76,13 +87,28 @@ const ProductDetails = () => {
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
       <Navbar setShowLogin={setShowLogin} />
       <div className="mt-20 max-w-[90%] sm:max-w-[95%] md:max-w-[90%] lg:max-w-[80%] mx-auto">
-        <div className="grid sm:flex gap-10 md:gap-5 lg:gap-10 ">
-          <img
-            src={product.image}
-            alt="Product Image"
-            className="w-fit sm:w-[50%] mx-auto"
-          />
-          <div className="sm:pt-5">
+        <div className="flex md:flex-row flex-col gap-10 md:gap-5 lg:gap-10 max-h-fit">
+          <div className="w-full md:w-1/2">
+            <Swiper
+              spaceBetween={10}
+              slidesPerView={1}
+              navigation
+              pagination={{ clickable: true }}
+              modules={[Navigation, Pagination]}
+            >
+              {product.image &&
+                product.image.map((image, index) => (
+                  <SwiperSlide key={index}>
+                    <img
+                      src={image}
+                      alt={`${product.productName} ${index + 1}`}
+                      className="object-cover mx-auto h-auto cursor-pointer"
+                    />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          </div>
+          <div className="sm:pt-5 md:w-1/2">
             <div className="border-[1px] border-black p-2 w-fit mb-3 uppercase">
               {product.brand}
             </div>
@@ -125,20 +151,57 @@ const ProductDetails = () => {
           <h2 className="text-base sm:text-xl font-semibold mb-5">
             Products Related to this Item
           </h2>
-          <div id="brand" className="brand grid gap-3 sm:gap-5 justify-items-center grid-flow-col sm:pl-5 scroll-m-2">
-            {/* lg:grid-cols-4 md:grid-cols-3 grid-cols-2 */}
+          <Swiper
+            slidesPerView="auto"
+            spaceBetween={15}
+            centeredSlides={false}
+            grabCursor={true}
+            keyboard={{
+              enabled: true,
+            }}
+            scrollbar={{ draggable: true }}
+            navigation={true}
+            modules={[Keyboard, Scrollbar, Navigation]}
+            style={{ paddingLeft:"15px", paddingRight:"15px"  }}
+          >
             {relatedProducts.map((relatedProduct) => (
-              <div className="w-56 h-full pb-3">
-                <ProductCard
-                  key={relatedProduct._id}
-                  product={relatedProduct}
-                />
-              </div>
+              <SwiperSlide
+                key={relatedProduct._id}
+                style={{ width: "auto", height: "100%"}}
+              >
+                <div className="w-56 shadow-sm h-full bg-white mb-5">
+                  <Link to={`/shop/products/${relatedProduct._id}`}>
+                    <img
+                      src={relatedProduct.image[0]}
+                      alt=""
+                      className="h-40 mx-auto"
+                    />
+                    <div className="pb-3">
+                      <h1 className="text-center font-bold text-red-500">
+                        {relatedProduct.brand}
+                      </h1>
+                      <h1 className="px-3 text-center sm:text-base text-sm overflow-hidden text-ellipsis h-[75px]">
+                        {relatedProduct.productName}
+                      </h1>
+                      <h1 className="font-semibold text-lg text-center">
+                        Rs. {relatedProduct.discountPrice}{" "}
+                        <span className="pl-1 font-normal line-through text-gray-500">
+                          {" "}
+                          MRP Rs. {relatedProduct.originalPrice}
+                        </span>
+                      </h1>
+                    </div>
+                  </Link>
+                </div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
         </div>
-        <div className="">
-          <div className="mb-5 font-serif text-xl sm:text-2xl mt-10">Recommended Products</div>
+
+        <div>
+          <div className="mb-5 font-serif text-xl sm:text-2xl mt-10">
+            Recommended Products
+          </div>
           <div className="grid gap-2 sm:gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
             {loading ? (
               <Loading />
