@@ -5,11 +5,12 @@ import axios from "axios";
 import { assets } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../UserContext";
+import toast from "react-hot-toast";
 
 const Add = () => {
   const history = useNavigate();
   const { userData } = useUserContext();
-  const [image, setImage] = useState(null);
+  const [images, setImages] = useState([]);
 
   const sellerID = userData ? userData._id : null;
 
@@ -30,13 +31,19 @@ const Add = () => {
       description: data.get("description"),
       brand: data.get("brand"),
       quantity: data.get("quantity"),
-      image: image,
     };
+    const formData = new FormData();
+    Object.keys(productData).forEach((key) => {
+      formData.append(key, productData[key]);
+    });
 
+    images.forEach((image) => {
+      formData.append("images", image);
+    });
     try {
       const response = await axios.post(
         "http://localhost:3002/api/auth/admin/products",
-        productData,
+        formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -45,9 +52,10 @@ const Add = () => {
       );
       if (response.status === 200) {
         history("#");
-        showAlert1();
+        // showAlert1();
+        toast.success("Product added Successfully.!!")
         window.location.reload();
-        setImage(false);
+        setImages([]);
         console.log("Product added successfully");
       } else {
         console.log("Failed to add product");
@@ -58,8 +66,8 @@ const Add = () => {
   };
   const handleDrop = (e) => {
     e.preventDefault();
-    const droppedFile = e.dataTransfer.files[0];
-    setImage(droppedFile);
+    const droppedFiles = Array.from(e.dataTransfer.files);
+    setImages(droppedFiles);
   };
 
   const handleDragOver = (e) => {
@@ -75,22 +83,44 @@ const Add = () => {
             Product Infromation
           </h1>
           <form className="mt-10 ml-5 mr-5 " onSubmit={handleProduct}>
-            <div class="mb-4" onDrop={handleDrop}
-          onDragOver={handleDragOver}>
-              <label htmlFor="image" class="inline-block text-gray-700 font-bold cursor-pointer">
+            <div class="mb-4" onDrop={handleDrop} onDragOver={handleDragOver}>
+              <label
+                htmlFor="image"
+                class="inline-block text-gray-700 font-bold cursor-pointer"
+              >
                 Product Image
-              <img
-                src={image ? URL.createObjectURL(image) : assets.upload_area}
-                alt=""
-                className="w-24 mt-2"
-              />
               </label>
+              <div className="flex flex-wrap gap-2 mt-2">
+                {images.length > 0 ? (
+                  images.map((image, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={URL.createObjectURL(image)}
+                        alt={`Product ${index + 1}`}
+                        className="w-24 h-24 object-cover"
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <label htmlFor="image" className="cursor-pointer">
+                    {/* <img src={assets.upload_area} alt="" className="w-24 mt-2" /> */}
+                  </label>
+                )}
+                {images.length < 10 && (
+                  <label htmlFor="image" className="cursor-pointer">
+                    <img src={assets.upload_area} alt="Add more images" className="w-24 mt-2" />
+                  </label>
+                )}
+              </div>
               <input
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) =>
+                  setImages([...images, ...Array.from(e.target.files)])
+                }
                 type="file"
                 id="image"
-                name="image"
-                class="hidden w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                name="images"
+                className="hidden w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200 focus:border-indigo-500"
+                multiple
                 required
               />
             </div>

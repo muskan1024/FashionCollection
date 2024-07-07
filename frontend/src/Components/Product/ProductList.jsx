@@ -25,10 +25,6 @@ const ProductList = ({ category }) => {
     fetchProducts();
   }, [category]);
 
-  // if (loading) {
-  //   return <Loading />;
-  // }
-
   return (
     <>
       {loading ? (

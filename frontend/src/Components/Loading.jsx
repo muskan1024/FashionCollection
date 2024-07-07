@@ -4,7 +4,6 @@ const Loading = () => {
   const NUM_PLACEHOLDERS = 10;
 
   return (
-    // <div className="grid grid-flow-col auto-cols-auto gap-10 justify-items-center">
     <>
       {Array.from({ length: NUM_PLACEHOLDERS }).map((_, index) => (
         <div class="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">

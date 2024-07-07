@@ -54,7 +54,7 @@ const Home = ({ categ, setCateg }) => {
       {/* {showLogin?<Login setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />:<></>}
       <Navbar setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> */}
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
-      <Navbar setShowLogin={setShowLogin} />
+      <Navbar setShowLogin={setShowLogin}/>
       <div className="max-w-[90%] md:max-w-[80%] mx-auto mt-20">
         <img
           src="/images/baner-1.png"
@@ -69,12 +69,6 @@ const Home = ({ categ, setCateg }) => {
             return (
               <div
                 className="cat-item-list"
-                // onClick={() =>
-                //   setCateg((prev) =>
-                //     prev === item.cat_name ? "All" : item.cat_name
-                //   )
-                // }
-                // onClick={() => setCateg(item.cat_name)}
                 onClick={() => handleCategoryClick(item.cat_name)}
                 key={index}
               >

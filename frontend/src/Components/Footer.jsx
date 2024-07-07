@@ -28,17 +28,11 @@ const Footer = () => {
           <div className="text-[14px] text-wrap pl-6">
             <ul className="pb-1">
               <LocalPhone sx={{ fontSize: 15 }} />{" "}
-              <a
-                href="tel:+918855023555"
-                className="hover:text-cyan-500"
-              >
+              <a href="tel:+918855023555" className="hover:text-cyan-500">
                 +918855023555
               </a>{" "}
               |{" "}
-              <a
-                href="tel:+919881987778"
-                className="hover:text-cyan-500 "
-              >
+              <a href="tel:+919881987778" className="hover:text-cyan-500 ">
                 +919881987778
               </a>
             </ul>
@@ -54,7 +48,8 @@ const Footer = () => {
             <ul>
               <WhatsApp sx={{ fontSize: 15 }} />{" "}
               <a
-                href="https://api.whatsapp.com/send?phone=+918857831831"
+                target="_blank"
+                href="https://wa.me/918857831831"
                 className="hover:text-cyan-500 pb-1"
               >
                 +918857831831
