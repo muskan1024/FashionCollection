@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Login from "../Login";
 import Navbar from "../Navbar";
-import { ShoppingCartOutlined } from "@mui/icons-material";
+import { ShoppingCartOutlined, WhatsApp } from "@mui/icons-material";
 import Footer from "../Footer";
 import ProductCard from "./ProductCard";
 import Loading from "../Loading";
@@ -20,6 +20,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import shop from "../shop.css";
+import { useUserContext } from "../UserContext";
+import { useDispatch } from "react-redux";
+import { addToCart, saveCartToDatabase } from "../../redux/slices/CartSlice";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -30,6 +33,10 @@ const ProductDetails = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   let sentences = [];
   const [selectedImage, setSelectedImage] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const { userData, setUserData } = useUserContext();
+  const dispatch = useDispatch();
+  const history = useNavigate();
 
   if (product.description) {
     if (product.description.includes(".")) {
@@ -46,6 +53,7 @@ const ProductDetails = () => {
       .get(`http://localhost:3002/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
+
         setSelectedImage(response.data.image[0]);
         fetchRelatedProducts(response.data);
       })
@@ -82,6 +90,82 @@ const ProductDetails = () => {
         setLoading(true);
       });
   }, []);
+
+  const handleAddToCart = () => {
+    const cartItem = {
+      productId: product._id,
+      productName: product.productName,
+      price: product.discountPrice,
+      quantity: quantity,
+      // image: product.image && product.image[0],
+      // isLoggedIn: !!userData, // Boolean indicating if user is logged in
+    };
+
+    if (userData) {
+      dispatch(addToCart(cartItem));
+      dispatch(
+        saveCartToDatabase({ userId: userData._id, cartItems: [cartItem] })
+      );
+    } else {
+      const cartItems = JSON.parse(sessionStorage.getItem("cartItems")) || [];
+      const existingItem = cartItems.find(
+        (item) => item.productId === cartItem.productId
+      );
+
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cartItems.push(cartItem);
+      }
+
+      sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
+      dispatch(addToCart(cartItem));
+    }
+    setQuantity(1);
+    history("/cart");
+  };
+  const handleQuantityChange = (e) => {
+    setQuantity(parseInt(e.target.value, 10));
+  };
+  const handleBookNowClick = (e) => {
+    if (!userData) {
+      e.preventDefault();
+      setShowLogin(true);
+    } else {
+      const whatsappLink = createWhatsAppLink();
+      if (whatsappLink) {
+        window.open(whatsappLink, "_blank");
+      }
+    }
+  };
+
+  const createWhatsAppLink = () => {
+    if (!userData) {
+      return null;
+    }
+    const productImage = product.image && product.image[0]
+    const message = `*Hello,*
+
+*I'm interested in booking the following product:*
+- *${product.productName}*
+- *Quantity:* ${quantity}
+- *Total Price:* Rs. ${product.discountPrice * quantity}
+
+Product Image: ${productImage}
+
+Product Link: ${window.location.href}
+
+*Please confirm availability and provide payment instructions.*
+
+*Contact Details:*
+- *Name:* ${userData.fullName}
+- *Mobile:* ${userData.contactNumber}
+- *Email:* ${userData.email}
+`;
+    const encodedMessage = encodeURIComponent(message);
+    return `https://wa.me/918857831831?text=${encodedMessage}`;
+  };
+
   return (
     <>
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
@@ -124,14 +208,44 @@ const ProductDetails = () => {
                 Rs. {product.originalPrice}
               </span>
             </div>
-            <div></div>
+            <div className="py-3">
+              <label htmlFor="" className="mr-2 text-lg font-semibold">
+                Quantity
+              </label>
+              <select
+                value={quantity}
+                onChange={handleQuantityChange}
+                className="w-20 py-2 border rounded-lg px-2 text-center"
+              >
+                {Array.from({ length: product.quantity }, (_, i) => i + 1).map(
+                  (num) => (
+                    <option key={num} value={num} className="text-center p-0">
+                      {num}
+                    </option>
+                  )
+                )}
+              </select>
+              <div className="mb-1 text-green-500 font-semibold text-sm">
+                {product.quantity} in Stock
+              </div>
+            </div>
             <div className="grid lg:flex gap-3 lg:gap-5 my-5">
-              <button className="w-full py-2 bg-slate-500 text-white font-semibold rounded-lg hover:shadow-md hover:shadow-gray-400">
+              <button
+                onClick={handleAddToCart}
+                className="w-full py-2 bg-slate-500 text-white font-semibold rounded-lg hover:shadow-md hover:shadow-gray-400"
+              >
                 <ShoppingCartOutlined className="mr-2" /> Add to Cart
               </button>
-              <button className="w-full py-2 bg-slate-700 text-white font-semibold rounded-lg hover:shadow-md hover:shadow-gray-400">
-                Buy Now
-              </button>
+              <a
+                target="_blank"
+                href={createWhatsAppLink() || "#"}
+                className="w-full py-2 bg-slate-700 text-white font-semibold rounded-lg hover:shadow-md hover:shadow-gray-400"
+                onClick={handleBookNowClick}
+              >
+                <button className="w-full">
+                  <WhatsApp /> Book Now
+                </button>
+              </a>
             </div>
             <div>
               <div className="text-lg font-semibold font-serif mb-2">
@@ -162,12 +276,12 @@ const ProductDetails = () => {
             scrollbar={{ draggable: true }}
             navigation={true}
             modules={[Keyboard, Scrollbar, Navigation]}
-            style={{ paddingLeft:"15px", paddingRight:"15px"  }}
+            style={{ paddingLeft: "15px", paddingRight: "15px" }}
           >
             {relatedProducts.map((relatedProduct) => (
               <SwiperSlide
                 key={relatedProduct._id}
-                style={{ width: "auto", height: "100%"}}
+                style={{ width: "auto", height: "100%" }}
               >
                 <div className="w-56 shadow-sm h-full bg-white mb-5">
                   <Link to={`/shop/products/${relatedProduct._id}`}>

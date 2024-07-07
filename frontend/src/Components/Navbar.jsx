@@ -5,6 +5,8 @@ import { SideBar } from "./SideBar";
 import { useUserContext } from "./UserContext";
 import axios from "axios";
 import shop from "./shop.css";
+import { Badge } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const Navbar = ({ setShowLogin }) => {
   const { userData } = useUserContext();
@@ -13,6 +15,9 @@ const Navbar = ({ setShowLogin }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const history = useNavigate();
+
+  const cart = useSelector((state) => state.cart.carts);
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -149,7 +154,9 @@ const Navbar = ({ setShowLogin }) => {
                     : "hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
                 }
               >
-                <ShoppingCart />
+                <Badge color="error" badgeContent={cartCount}>
+                  <ShoppingCart />
+                </Badge>
               </NavLink>
 
               {userData ? (

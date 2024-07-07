@@ -54,7 +54,7 @@ const Home = ({ categ, setCateg }) => {
       {/* {showLogin?<Login setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />:<></>}
       <Navbar setShowLogin={setShowLogin} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/> */}
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}
-      <Navbar setShowLogin={setShowLogin} />
+      <Navbar setShowLogin={setShowLogin}/>
       <div className="max-w-[90%] md:max-w-[80%] mx-auto mt-20">
         <img
           src="/images/baner-1.png"

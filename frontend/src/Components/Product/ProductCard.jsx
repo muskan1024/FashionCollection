@@ -9,10 +9,10 @@ const ProductCard = ({ product }) => {
         <Link to={`/shop/products/${product._id}`}>
           <img src={firstImage} alt="Product Image" className="object-cover h-40 mx-auto" />
           <div className="p-2">
-            <h1 className="text-center font-bold text-red-500">
+            <h1 className="text-center font-bold text-red-500 overflow-hidden text-ellipsis h-[25px]">
               {product.brand}
             </h1>
-            <h1 className="px-3 text-center sm:text-base text-sm">
+            <h1 className="px-3 text-center sm:text-base text-sm overflow-hidden text-ellipsis h-[75px]">
               {product.productName}
             </h1>
             <h1 className="font-semibold text-lg text-center">

@@ -5,6 +5,7 @@ import axios from "axios";
 import { assets } from "../../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../UserContext";
+import toast from "react-hot-toast";
 
 const Add = () => {
   const history = useNavigate();
@@ -51,7 +52,8 @@ const Add = () => {
       );
       if (response.status === 200) {
         history("#");
-        showAlert1();
+        // showAlert1();
+        toast.success("Product added Successfully.!!")
         window.location.reload();
         setImages([]);
         console.log("Product added successfully");

@@ -185,6 +185,18 @@ async function getRelatedProducts(req, res) {
   }
 }
 
+async function cartProducts(req, res) {
+  const { productIds } = req.body;
+
+  try {
+    const products = await Product.find({ _id: { $in: productIds } });
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products by IDs:", error);
+    res.status(500).json({ error: "Error fetching products by IDs" });
+  }
+}
+
 module.exports = {
   saveProduct,
   getProducts,
@@ -192,4 +204,5 @@ module.exports = {
   searchProducts,
   getProductById,
   getRelatedProducts,
+  cartProducts
 };
