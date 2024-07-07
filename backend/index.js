@@ -1,6 +1,6 @@
 const express = require("express");
 const { userSignIn, userSignUp } = require("./controllers/userController");
-const { saveProduct, getProducts, getSuggestions, searchProducts, getProductById } = require("./controllers/productController");
+const { saveProduct, getProducts, getSuggestions, searchProducts, getProductById, getRelatedProducts } = require("./controllers/productController");
 const multer = require("multer");
 const router = express.Router();
 const cloudinary = require("cloudinary").v2;
@@ -24,5 +24,6 @@ router.get("/api/products", getProducts);
 router.get("/api/products/suggestions", getSuggestions);
 router.get("/api/products/search", searchProducts);
 router.get("/api/products/:id", getProductById);
+router.get("/api/related", getRelatedProducts);
 
 module.exports = router;

@@ -64,7 +64,7 @@ const Home = ({ categ, setCateg }) => {
         <h1 className="-mb-2 mt-10 font-serif text-3xl ">
           Explore <span className="text-zinc-600">By</span> Categories
         </h1>
-        <div className="px-5 lg:px-10 flex justify-between gap-5 items-center text-center overflow-x-scroll cat-list mb-6">
+        <div className="px-5 lg:px-10 flex justify-between gap-5 items-center text-center overflow-x-scroll scroll-auto cat-list mb-6">
           {category_list.map((item, index) => {
             return (
               <div
@@ -89,9 +89,7 @@ const Home = ({ categ, setCateg }) => {
           })}
         </div>
         <div className="">
-          <div className="mb-8 font-serif text-3xl mt-10 text-slate-800 font-semibold ">
-            Latest <span className="text-slate-600">Collection.</span>
-          </div>
+          <div className="mb-8 font-serif text-3xl mt-10 text-slate-800 font-semibold ">Latest <span className="text-slate-600">Collection.</span></div>
           <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
             {loading ? (
               <Loading />
