@@ -59,17 +59,6 @@ const cartSlice = createSlice({
 export const { addToCart, removeFromCart, incrementQty, decrementQty, clearCart, setCartItems } = cartSlice.actions;
 export default cartSlice.reducer;
 
-// Async Action Creator: Save Cart to Database
-// export const saveCartToDatabase = (userId, cartItems) => async (dispatch) => {
-//   try {
-//     const response = await axios.post(`http://localhost:3002/api/cart/add`, { cartItems });
-//     console.log("Cart saved to database:", response.data);
-//     dispatch(clearCart()); // Clear local cart after saving to database
-//   } catch (error) {
-//     console.error("Error saving cart to database:", error);
-//   }
-// };
-
 export const saveCartToDatabase = createAsyncThunk(
   "cart/saveCartToDatabase",
   async ({ userId, cartItems }, { rejectWithValue }) => {

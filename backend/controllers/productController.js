@@ -10,14 +10,12 @@ async function saveProduct(req, res) {
   try {
     if (req.files && req.files.length > 0) {
       for (const file of req.files) {
-        // Resize the image to 1000x1000 pixels using sharp
         const resizedBuffer = await sharp(file.path)
           .resize(1000, 1000, {
             fit: sharp.fit.cover,
           })
           .toBuffer();
 
-        // Upload the resized image buffer to Cloudinary
         const result = await new Promise((resolve, reject) => {
           const uploadStream = cloudinary.uploader.upload_stream(
             { resource_type: "image" },
@@ -131,14 +129,14 @@ async function getSuggestions(req, res) {
     if (search) {
       query = {
         $or: [
-          { brand: { $regex: search, $options: "i" } }, // Match brand
-          { category: { $regex: search, $options: "i" } }, // Match category
-          { productName: { $regex: search, $options: "i" } }, // Match product name
+          { brand: { $regex: search, $options: "i" } }, 
+          { category: { $regex: search, $options: "i" } },
+          { productName: { $regex: search, $options: "i" } }, 
         ],
       };
     }
 
-    const suggestions = await Product.find(query).limit(10); // Limiting to 10 suggestions
+    const suggestions = await Product.find(query).limit(10); 
     res.json(suggestions);
   } catch (error) {
     console.error("Error:", error);
@@ -172,7 +170,6 @@ async function getRelatedProducts(req, res) {
       filter.$or.push({ brand });
     }
 
-    // Exclude the current product
     if (exclude) {
       filter._id = { $ne: mongoose.Types.ObjectId(exclude) };
     }

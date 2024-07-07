@@ -58,7 +58,6 @@ const Navbar = ({ setShowLogin }) => {
   };
 
   const handleSearch = (e) => {
-    // dispatch(setSearch(searchQuery.trim()));
     history(`/search-results?q=${encodeURIComponent(searchQuery.trim())}`);
     setSuggestions([]);
   };
@@ -147,7 +146,6 @@ const Navbar = ({ setShowLogin }) => {
               </NavLink>
               <NavLink
                 to="/cart"
-                // className="hover:border-b-2 hover:border-red-500 ease-in-out duration-100"
                 className={({ isActive }) =>
                   isActive
                     ? "border-b-2 border-slate-400 ease-in duration-300"

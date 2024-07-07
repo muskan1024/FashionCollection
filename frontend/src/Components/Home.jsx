@@ -69,12 +69,6 @@ const Home = ({ categ, setCateg }) => {
             return (
               <div
                 className="cat-item-list"
-                // onClick={() =>
-                //   setCateg((prev) =>
-                //     prev === item.cat_name ? "All" : item.cat_name
-                //   )
-                // }
-                // onClick={() => setCateg(item.cat_name)}
                 onClick={() => handleCategoryClick(item.cat_name)}
                 key={index}
               >

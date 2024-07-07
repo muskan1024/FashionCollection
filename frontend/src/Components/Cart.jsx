@@ -7,7 +7,6 @@ import { Add, DeleteForever, Remove, WhatsApp } from "@mui/icons-material";
 import { toast } from "react-hot-toast";
 
 import {
-  addToCart,
   decrementQty,
   incrementQty,
   removeFromCart,
@@ -63,9 +62,7 @@ const Cart = () => {
       }
     };
 
-    // if (cartItems.length > 0) {
     fetchProducts();
-    // }
   }, [cartItems]);
   const handleUpdateCartItem = async (productId, quantity) => {
     try {
@@ -155,7 +152,6 @@ const Cart = () => {
                   <span className="font-bold"> ₹{totalPrice}</span>
                 </div>
                 <div className="text-base py-2 bg-slate-700 font-bold text-white rounded-lg p-1 w-[80%] ">
-                  {/* <Link to={`/products/${cartItems}/payment`}> */}
                   <a
                     target="_blank"
                     href="https://wa.me/918857831831"
@@ -165,7 +161,6 @@ const Cart = () => {
                       <WhatsApp /> Message/Call to Book Now
                     </button>
                   </a>
-                  {/* </Link> */}
                 </div>
               </div>
             </div>
@@ -201,7 +196,6 @@ const Cart = () => {
                           </span>{" "}
                           {product.brand}
                         </div>
-                        {/* <div className="justify-self-center flex gap-5 pt-2 sm:py-0"> */}
                         <div className="flex gap-2 mt-2">
                           <label htmlFor="">Quantity</label>
                           <Remove
@@ -237,7 +231,6 @@ const Cart = () => {
                                   "Cannot add more items. Maximum quantity reached.!"
                                 );
                               }
-                              // "Cannot add more items. Maximum quantity reached.!"
                             }}
                             className="border-2 border-gray-600 text-gray-600 hover:text-white hover:bg-green-500 hover:border-none rounded-md p-1 cursor-pointer text-xl"
                           />
@@ -252,8 +245,6 @@ const Cart = () => {
                             <DeleteForever className="hover:text-red-500" />
                           </span>
                         </div>
-
-                        {/* </div> */}
                       </div>
                     </Link>
                   </div>
