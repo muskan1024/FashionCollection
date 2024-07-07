@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import shop from "./shop.css";
-import { Search } from "@mui/icons-material";
+
 import { category_list } from "../assets/assets";
 import Login from "./Login";
 import Footer from "./Footer";
@@ -9,6 +8,7 @@ import ProductCard from "./Product/ProductCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading";
+import Brands from "./Brands";
 
 const Home = ({ categ, setCateg }) => {
   const [showLogin, setShowLogin] = useState(false);
@@ -37,7 +37,6 @@ const Home = ({ categ, setCateg }) => {
     } else {
       history(`/shop/${categoryName}`);
     }
-
   };
 
   const handleSearch = (e) => {
@@ -49,6 +48,7 @@ const Home = ({ categ, setCateg }) => {
       handleSearch();
     }
   };
+
   return (
     <>
       {/* {showLogin?<Login setShowLogin={setShowLogin} setIsLoggedIn={setIsLoggedIn} />:<></>}
@@ -62,7 +62,7 @@ const Home = ({ categ, setCateg }) => {
           className="rounded-lg justify-self-center w-[100%] mt-5"
         />
         <h1 className="-mb-2 mt-10 font-serif text-3xl ">
-          Explore <span className="text-zinc-600">By</span>  Categories
+          Explore <span className="text-zinc-600">By</span> Categories
         </h1>
         <div className="px-5 lg:px-10 flex justify-between gap-5 items-center text-center overflow-x-scroll cat-list mb-6">
           {category_list.map((item, index) => {
@@ -89,7 +89,9 @@ const Home = ({ categ, setCateg }) => {
           })}
         </div>
         <div className="">
-          <div className="mb-8 font-serif text-3xl mt-10 text-slate-800 font-semibold ">Latest <span className="text-slate-600">Collection.</span></div>
+          <div className="mb-8 font-serif text-3xl mt-10 text-slate-800 font-semibold ">
+            Latest <span className="text-slate-600">Collection.</span>
+          </div>
           <div className="grid gap-5 justify-items-center lg:grid-cols-4 md:grid-cols-3 grid-cols-2">
             {loading ? (
               <Loading />
@@ -104,18 +106,7 @@ const Home = ({ categ, setCateg }) => {
             )}
           </div>
         </div>
-
-              <div className="mt-10 ">
-                <div className="  text-3xl text-cyan-900 font-mono font-bold tracking-widest">BRANDS <span className="text-cyan-700"> WE </span> <span className="text-cyan-600">CARRY.</span> </div>
-                <div className="flex h-72  mt-3  justify-between gap-10  text-center overflow-x-scroll cat-list mb-6">
-                <img className=" onClick={handleSearch} w-72" src="/images/RaymondLogo.jpg" alt="" />
-                <img className=" onClick={handleSearch} w-72 " src="/images/siyaram.png" alt="" />
-                <img className=" onClick={handleSearch} w-72 " src="/images/lenenClub.png" alt="" />
-                <img className=" onClick={handleSearch} w-72 " src="/images/OCM.png" alt="" />
-                <img className=" onClick={handleSearch} w-72 " src="/images/gwalior.png" alt="" />
-                </div>
-              </div>
-
+        <Brands />
       </div>
       <Footer />
     </>

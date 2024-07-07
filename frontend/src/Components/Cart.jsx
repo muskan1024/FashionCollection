@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 const Cart = () => {
   const [showLogin, setShowLogin] = useState(false);
 
+  const [cartItems,setCartItems]=useState({})
   return (
     <>
       {showLogin ? <Login setShowLogin={setShowLogin} /> : <></>}

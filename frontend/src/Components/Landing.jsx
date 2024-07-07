@@ -11,6 +11,8 @@ import Add from "./Admin/Add";
 import ScrollToTop from "./ScrollToTop";
 import SearchResult from "./Product/SearchResult";
 import ProductDetails from "./Product/ProductDetails";
+import BuyNow from "./BuyNow";
+import { AddAddress } from "./Address";
 
 const Landing = () => {
   const [categ, setCateg] = useState("All");
@@ -45,6 +47,8 @@ const Landing = () => {
           <Route path="/admin/login" element={<LoginA />}></Route>
           <Route path="/admin/home" element={<HomeA />}></Route>
           <Route path="/admin/addproducts" element={<Add />}></Route>
+          <Route path="/buynow" element={<BuyNow/>}></Route>
+          <Route path="/address" element={<AddAddress/>}></Route>
         </Routes>
       </UserProvider>
     </BrowserRouter>
