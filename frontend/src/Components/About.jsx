@@ -18,15 +18,15 @@ const About = () => {
       <div className="">
         <div className=" relative flex max-w-[90%] md:max-w-[70%] mx-auto">
           <img src="/images/About.jpg" alt="" className="" />
-          <h3 className="absolute w-[100%] top-[80%] bg-white translate-y-[-50%] py-[0.5rem] md:py-[1rem] text-center font-extrabold text-[20px] md:text-[2rem] mix-blend-screen ">
+          <h3 className="absolute w-[100%] top-[80%] bg-white translate-y-[-50%] py-[0.5rem] md:py-[1rem] text-center font-extrabold text-2xl md:text-[2rem] mix-blend-screen ">
             Best Tailor & Fabrics Seller
           </h3>
         </div>
         <div className="text-center mt-2 ">
-          <h2 className="text-red-600 font-semibold text-2xl">
+          <h2 className="text-red-600 font-bold text-2xl">
             Fashion Collection & Mens Wear
           </h2>
-          <p>Fashion Mens Wear,Since 1992.</p>
+          <p className="text-stone-700 font-bold">Fashion Mens Wear,Since 1992.</p>
         </div>
         <div className="mt-8 max-w-[90%] md:max-w-[70%] mx-auto text-gray-600 font-sans">
           <p>
@@ -114,7 +114,11 @@ const About = () => {
           >
             <img src="/images/map.jpg" alt="" />
           </a>
+          <div className="mt-7">
+          <h1>OUR ACHIEVEMENTS.!</h1>
         </div>
+        </div>
+        
       </div>
       <br />
       <br />
