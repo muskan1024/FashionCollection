@@ -26,7 +26,9 @@ const About = () => {
           <h2 className="text-red-600 font-bold text-2xl">
             Fashion Collection & Mens Wear
           </h2>
-          <p className="text-stone-700 font-bold">Fashion Mens Wear,Since 1992.</p>
+          <p className="text-stone-700 font-bold">
+            Fashion Mens Wear,Since 1992.
+          </p>
         </div>
         <div className="mt-8 max-w-[90%] md:max-w-[70%] mx-auto text-gray-600 font-sans">
           <p>
@@ -72,14 +74,16 @@ const About = () => {
             <h1 className="font-bold">Phone</h1>
             <Phone sx={{ fontSize: 15 }} />{" "}
             <a
-              href="https://api.whatsapp.com/send?phone=+918857831831"
+              href="https://wa.me/918857831831"
+              // href="tel:+918857831831"
               className="hover:text-blue-700 pb-1"
             >
               +918857831831
             </a>{" "}
             |
             <a
-              href="https://api.whatsapp.com/send?phone=+919881987778"
+              href="https://wa.me/919881987778"
+              // href="tel:+919881987778"
               className="hover:text-blue-700 pb-1"
             >
               {" "}
@@ -99,7 +103,8 @@ const About = () => {
               <br />
               <WhatsApp sx={{ fontSize: 15 }} />{" "}
               <a
-                href="https://api.whatsapp.com/send?phone=+918857831831"
+                target="_blank"
+                href="https://wa.me/918857831831"
                 className="hover:text-blue-700  pb-1"
               >
                 +918857831831
@@ -114,11 +119,10 @@ const About = () => {
           >
             <img src="/images/map.jpg" alt="" />
           </a>
-          <div className="mt-7">
-          <h1>OUR ACHIEVEMENTS.!</h1>
+          {/* <div className="mt-7">
+            <h1>OUR ACHIEVEMENTS.!</h1>
+          </div> */}
         </div>
-        </div>
-        
       </div>
       <br />
       <br />
