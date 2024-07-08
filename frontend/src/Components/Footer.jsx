@@ -64,7 +64,6 @@ const Footer = () => {
           About Us
         </Link>
       </div>
-      {/* <hr className="border-[1px] border-gray-400 block sm:hidden"/> */}
 
       <div className="pb-3">
         <p className="font-semibold">

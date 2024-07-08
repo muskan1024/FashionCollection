@@ -122,6 +122,47 @@ const Cart = () => {
     (total, item) => total + item.quantity * item.price,
     0
   );
+   const createCartWhatsAppLink = (cartItems, products) => {
+    if (!cartItems.length) return null;
+
+    let message = "*Hi, I would like to book the following items from my cart:*\n\n";
+    cartItems.forEach((item, index) => {
+      const product = products.find((p) => p._id === item.productId);
+      const productImage = product.image && product.image[0]
+      if (product) {
+        const productLink = `http://localhost:3000/shop/products/${product._id}`;
+        message += `*${index + 1}. ${product.productName}*\n`;
+        message += `   *- Quantity:* ${item.quantity}\n`;
+        message += `   *- Price:* ₹${product.discountPrice}\n`;
+        message += `   *- Brand:* ${product.brand}\n`;
+        message += `   *Product Image:* ${productImage}\n`;
+        message += `   *Product Link:* ${productLink}\n\n\n`
+      }
+    });
+    message += `*Total Items: ${totalQty}*\n`
+    message += `*Total Price: ₹${totalPrice}*\n\n\n`;
+    if (userData) {
+      message += `*Contact Details:*\n`;
+      message += `     *Name:* ${userData.fullName}\n`;
+      message += `     *Mobile No:* +91${userData.contactNumber}\n`; 
+      message += `     *Email:* ${userData.email}\n`;
+    }
+
+    const encodedMessage = encodeURIComponent(message);
+    return `https://wa.me/918857831831?text=${encodedMessage}`;
+  };
+
+  const handleBookNowClick = (e) => {
+    if (!userData) {
+      e.preventDefault(); 
+      setShowLogin(true); 
+    } else {
+      const whatsappLink = createCartWhatsAppLink(cartItems, products);
+      if (whatsappLink) {
+        window.open(whatsappLink, "_blank"); 
+      }
+    }
+  };
   useEffect(() => {
     axios
       .get("http://localhost:3002/api/products")
@@ -153,9 +194,10 @@ const Cart = () => {
                 </div>
                 <div className="text-base py-2 bg-slate-700 font-bold text-white rounded-lg p-1 w-[80%] ">
                   <a
-                    target="_blank"
-                    href="https://wa.me/918857831831"
+                    href="#"
+                    // href="https://wa.me/918857831831"
                     className="hover:text-cyan-500 pb-1"
+                    onClick={handleBookNowClick}
                   >
                     <button>
                       <WhatsApp /> Message/Call to Book Now
