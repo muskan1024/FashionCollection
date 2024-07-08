@@ -23,8 +23,6 @@ const BuyNow = () => {
 
   return (
     <>
-    {/* <Toaster position="top-center" reverseOrder={false} /> */}
-
     <div className='fixed z-10 top-0 w-full bg-white '>
       <div className='grid grid-cols-2 md:grid-cols-3 justify-items-center md:justify-around px-2 py-3 shadow-lg'>
         <Link to='/' className='flex justify-self-center gap-2 font-bold  md:w-fit items-center text-xl'>

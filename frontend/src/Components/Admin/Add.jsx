@@ -14,10 +14,6 @@ const Add = () => {
 
   const sellerID = userData ? userData._id : null;
 
-  function showAlert1() {
-    var myText = "Product added succesfully";
-    alert(myText);
-  }
   const handleProduct = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -52,7 +48,6 @@ const Add = () => {
       );
       if (response.status === 200) {
         history("#");
-        // showAlert1();
         toast.success("Product added Successfully.!!")
         window.location.reload();
         setImages([]);
