@@ -25,8 +25,8 @@ const Login = ({ setShowLogin }) => {
     try {
       const apiUrl =
         currState === "Login"
-          ? "http://localhost:3002/api/auth/user/login" 
-          : "http://localhost:3002/api/auth/user/signup";
+          ? "https://fashion-collection-backend-rosy.vercel.app/api/auth/user/login" 
+          : "https://fashion-collection-backend-rosy.vercel.app/api/auth/user/signup";
 
       const response = await axios.post(apiUrl, formData);
       if (response.status === 200) {

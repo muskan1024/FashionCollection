@@ -32,7 +32,7 @@ const Cart = () => {
       try {
         if (userData && userData._id) {
           const response = await axios.get(
-            `http://localhost:3002/api/cart/${userData._id}`
+            `https://fashion-collection-backend-rosy.vercel.app/api/cart/${userData._id}`
           );
           dispatch(setCartItems(response.data));
           console.log(response.data);
@@ -52,7 +52,7 @@ const Cart = () => {
       try {
         const productIds = cartItems.map((item) => item.productId);
         const response = await axios.post(
-          "http://localhost:3002/api/cartproducts",
+          "https://fashion-collection-backend-rosy.vercel.app/api/cartproducts",
           { productIds }
         );
         setProducts(response.data);
@@ -67,7 +67,7 @@ const Cart = () => {
   const handleUpdateCartItem = async (productId, quantity) => {
     try {
       if (userData && userData._id) {
-        await axios.put("http://localhost:3002/api/cart/update", {
+        await axios.put("https://fashion-collection-backend-rosy.vercel.app/api/cart/update", {
           userId: userData._id,
           productId,
           quantity,
@@ -97,7 +97,7 @@ const Cart = () => {
     try {
       if (userData && userData._id) {
         await axios.delete(
-          `http://localhost:3002/api/cart/remove/${userData._id}/${productId}`
+          `https://fashion-collection-backend-rosy.vercel.app/api/cart/remove/${userData._id}/${productId}`
         );
       } else {
         let sessionCart = JSON.parse(sessionStorage.getItem("cart")) || [];
@@ -130,7 +130,7 @@ const Cart = () => {
       const product = products.find((p) => p._id === item.productId);
       const productImage = product.image && product.image[0]
       if (product) {
-        const productLink = `http://localhost:3000/shop/products/${product._id}`;
+        const productLink = `https://fashion-collection-backend-rosy.vercel.app/shop/products/${product._id}`;
         message += `*${index + 1}. ${product.productName}*\n`;
         message += `   *- Quantity:* ${item.quantity}\n`;
         message += `   *- Price:* ₹${product.discountPrice}\n`;
@@ -165,7 +165,7 @@ const Cart = () => {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:3002/api/products")
+      .get("https://fashion-collection-backend-rosy.vercel.app/api/products")
       .then((response) => {
         const top4 = response.data.slice(0, 4);
         setTopProduct(top4);

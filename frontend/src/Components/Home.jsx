@@ -20,7 +20,7 @@ const Home = ({ categ, setCateg }) => {
   const history = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:3002/api/products")
+      .get("https://fashion-collection-backend-rosy.vercel.app/api/products")
       .then((response) => {
         const top4 = response.data.slice(0, 8);
         setTopProducts(top4);

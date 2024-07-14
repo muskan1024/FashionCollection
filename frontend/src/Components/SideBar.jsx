@@ -39,11 +39,11 @@ export const SideBar = ({ isOpen, onClose }) => {
                 Your Profile
               </p>
             </Link>
-            <Link className="w-[100%]" to="/profile/orders">
+            {/* <Link className="w-[100%]" to="/profile/orders">
               <p className="hover:bg-gray-200 w-[100%] rounded-md p-1">
                 Your Orders
               </p>
-            </Link>
+            </Link> */}
             <Link className="w-[100%]" to="/cart">
               <p className="hover:bg-gray-200 w-[100%] rounded-md p-1">
                 Your Shopping Cart

@@ -32,7 +32,7 @@ const Navbar = ({ setShowLogin }) => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:3002/api/products/suggestions?q=${query}`
+        `https://fashion-collection-backend-rosy.vercel.app/api/products/suggestions?q=${query}`
       );
       const processedSuggestions = response.data
         .filter(

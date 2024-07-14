@@ -10,7 +10,7 @@ const ProductList = ({ category }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        let url = "http://localhost:3002/api/products";
+        let url = "https://fashion-collection-backend-rosy.vercel.app/api/products";
         if (category) {
           url += `?category=${category}`;
         }

@@ -17,7 +17,7 @@ const LoginA = () => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:3002/api/auth/user/login",
+        "https://fashion-collection-backend-rosy.vercel.app/api/auth/user/login",
         formData
       );
       if (response.status === 200) {

@@ -23,7 +23,7 @@ const SearchResult = () => {
   const fetchSearchResults = async (query) => {
     try {
       const response = await axios.get(
-        `http://localhost:3002/api/products/search?q=${query}`
+        `https://fashion-collection-backend-rosy.vercel.app/api/products/search?q=${query}`
       );
       console.log("Response:", response.data);
       setSearchResults(response.data);

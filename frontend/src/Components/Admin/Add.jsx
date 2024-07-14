@@ -38,7 +38,7 @@ const Add = () => {
     });
     try {
       const response = await axios.post(
-        "http://localhost:3002/api/auth/admin/products",
+        "https://fashion-collection-backend-rosy.vercel.app/api/auth/admin/products",
         formData,
         {
           headers: {

@@ -50,7 +50,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3002/api/products/${id}`)
+      .get(`https://fashion-collection-backend-rosy.vercel.app/api/products/${id}`)
       .then((response) => {
         setProduct(response.data);
 
@@ -65,7 +65,7 @@ const ProductDetails = () => {
   const fetchRelatedProducts = async (productData) => {
     const { category, brand } = productData;
     try {
-      const response = await axios.get(`http://localhost:3002/api/related`, {
+      const response = await axios.get(`https://fashion-collection-backend-rosy.vercel.app/api/related`, {
         params: {
           category,
           brand,
@@ -79,7 +79,7 @@ const ProductDetails = () => {
   };
   useEffect(() => {
     axios
-      .get("http://localhost:3002/api/products")
+      .get("https://fashion-collection-backend-rosy.vercel.app/api/products")
       .then((response) => {
         const top4 = response.data.slice(0, 4);
         setTopProducts(top4);
