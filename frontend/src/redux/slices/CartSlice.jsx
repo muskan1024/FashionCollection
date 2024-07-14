@@ -63,7 +63,7 @@ export const saveCartToDatabase = createAsyncThunk(
   "cart/saveCartToDatabase",
   async ({ userId, cartItems }, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`http://localhost:3002/api/cart/add`, {
+      const response = await axios.post(`https://fashion-collection-backend-rosy.vercel.app/api/cart/add`, {
         userId,
         cartItems,
       });
